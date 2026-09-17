@@ -1,322 +1,1005 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Researcher Dashboard</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; background: #f7f8fb; color: #1f2937; }
-  .page { max-width: 1200px; margin: 0 auto; padding: 24px; }
-  h1, h2, h3 { margin-top: 0; }
-  .card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 18px; margin-bottom: 16px; }
-  .muted { color: #6b7280; font-size: 13px; }
-  .notice { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; border-radius: 10px; padding: 12px 14px; font-size: 13px; margin-bottom: 16px; }
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 8px; }
-  .stat { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; }
-  .stat-label { display: block; color: #6b7280; font-size: 12px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .stat-value { font-size: 22px; font-weight: bold; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { border: 1px solid #e5e7eb; text-align: left; vertical-align: top; padding: 8px 10px; }
-  th { background: #f9fafb; color: #6b7280; position: sticky; top: 0; }
-  .table-wrap { overflow-x: auto; }
-  .pill { display: inline-block; padding: 4px 9px; border-radius: 999px; font-size: 11px; font-weight: bold; }
-  .pill.yes { background: #fee2e2; color: #991b1b; }
-  .pill.no { background: #dbeafe; color: #1d4ed8; }
-  .pill.na { background: #f3f4f6; color: #6b7280; }
-  .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-  button { padding: 9px 14px; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; cursor: pointer; font-size: 13px; }
-  button.danger { color: #991b1b; border-color: #fecaca; }
-  .empty-state { padding: 20px; text-align: center; color: #6b7280; }
-  .reason-item { border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; background: #fafafa; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Researcher Dashboard</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --panel: #ffffff;
+      --panel-soft: #f9fafb;
+      --border: #e5e7eb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --ink: #111827;
+      --yes: #bbf7d0;
+      --yes-text: #166534;
+      --no: #dbeafe;
+      --no-text: #1d4ed8;
+      --ai: #ede9fe;
+      --ai-text: #5b21b6;
+      --warn: #fef3c7;
+      --warn-text: #92400e;
+      --danger: #fecaca;
+      --danger-text: #991b1b;
+      --shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 18px 20px;
+      margin-bottom: 18px;
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .stat {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      min-height: 100px;
+    }
+    .stat-label {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .stat-value {
+      font-size: clamp(22px, 2vw, 32px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .stat-subtext {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    button {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    button:hover { background: #f5f7fb; }
+    button.secondary { background: #eef2ff; border-color: #c7d2fe; }
+    button.danger { background: #fff1f2; border-color: #fecdd3; color: var(--danger-text); }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th:last-child, td:last-child { border-right: none; }
+    th {
+      background: #f9fafb;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+    tbody tr.selected {
+      background: #eef6ff;
+    }
+    tr.conversation-row { cursor: pointer; }
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .pill.yes { background: var(--yes); color: var(--yes-text); }
+    .pill.no { background: var(--no); color: var(--no-text); }
+    .pill.ai { background: var(--ai); color: var(--ai-text); }
+    .pill.neutral { background: #f3f4f6; color: #374151; }
+    .pill.warning { background: var(--warn); color: var(--warn-text); }
+    .pill.danger { background: var(--danger); color: var(--danger-text); }
+
+    .empty-state {
+      padding: 24px 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .analysis-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .analysis-panel, .insight-panel {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .analysis-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .analysis-header h2 { margin-bottom: 2px; }
+    .summary-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .conversation-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-button {
+      min-width: 72px;
+    }
+    .conversation-bubbles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: 100%;
+    }
+    .conversation-bubble {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 0 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .conversation-bubble:hover {
+      background: #f5f7fb;
+      border-color: #cbd5e1;
+    }
+    .conversation-bubble.selected {
+      background: #dbeafe;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+      box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.22);
+    }
+    .transcript-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .turn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      padding: 12px;
+    }
+    .turn.customer {
+      border-left: 4px solid #a5b4fc;
+      background: #f8faff;
+    }
+    .turn.agent {
+      border-left: 4px solid #d1d5db;
+    }
+    .turn.escalation {
+      box-shadow: inset 0 0 0 2px rgba(239, 68, 68, 0.35);
+      background: #fff7f7;
+    }
+    .turn-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .turn-text {
+      color: var(--ink);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .turn-analysis {
+      margin-top: 10px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .mini-metric {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 9px;
+      font-size: 12px;
+    }
+    .mini-metric strong { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .trigger-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .trigger {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .turn-button {
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    .chart-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .chart-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .emotion-list {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 44px;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .bar-track {
+      position: relative;
+      height: 8px;
+      border-radius: 999px;
+      background: #edf2f7;
+      overflow: hidden;
+    }
+    .bar-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #818cf8, #60a5fa, #34d399);
+    }
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .dimension-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
+    }
+    .dimension-box strong {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 10px;
+    }
+    .analysis-panel h3, .insight-panel h3 {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .analysis-layout { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<div class="page">
-  <div class="card">
-    <h1>Researcher Dashboard</h1>
-    <div class="notice">
-      Researcher-only view. Reads response/qualification data saved in <em>this browser's</em> localStorage
-      (not shared across devices - once a cloud database is wired up in dataSubmission.js, this should read
-      from there instead). Never linked from the participant-facing study.
+  <div class="page">
+    <div class="card">
+      <div class="header-row">
+        <div>
+          <h1>Researcher Dashboard</h1>
+          <p class="muted">Combined comparison of general participants, professional reviewers, and precomputed AI analysis for the fixed 25 conversations.</p>
+        </div>
+        <div class="toolbar">
+          <button id="refreshButton" class="secondary">Refresh</button>
+        </div>
+      </div>
+      <div id="summaryGrid" class="summary-grid"></div>
     </div>
-    <div id="summary" class="summary-grid"></div>
-    <div class="controls">
-      <button id="exportResponsesButton">Export responses (JSON)</button>
-      <button id="exportQualificationsButton">Export qualifications (JSON)</button>
-      <button id="refreshButton">Refresh</button>
-      <button id="clearButton" class="danger">Clear all stored data</button>
+
+    <div class="card">
+      <h2>25-Conversation Comparison</h2>
+      <div id="conversationTableWrap" class="table-wrap"></div>
+    </div>
+
+    <div class="card">
+      <h2>Expanded Conversation Analysis</h2>
+      <div id="analysisDetail"></div>
     </div>
   </div>
 
-  <div class="card">
-    <h2>Completion status</h2>
-    <p class="muted">"Started" = has at least one conversation response. "Completed" = has a study_completions record (post-study survey submitted).</p>
-    <div id="completionTable" class="table-wrap"></div>
-  </div>
-
-  <div class="card">
-    <h2>Per-conversation comparison</h2>
-    <p class="muted">AI decision comes from research/ai_analysis_25.json (precomputed offline). Handoff rate = share of responses in that role choosing "Yes - Transfer to Human".</p>
-    <div id="conversationTable" class="table-wrap"></div>
-  </div>
-
-  <div class="card">
-    <h2>Professional reviewer qualifications</h2>
-    <div id="qualificationsTable" class="table-wrap"></div>
-  </div>
-
-  <div class="card">
-    <h2>Post-study survey answers</h2>
-    <div id="postSurveyTable" class="table-wrap"></div>
-  </div>
-
-  <div class="card">
-    <h2>Written explanations</h2>
-    <p class="muted">Every optional reason a respondent entered, for qualitative reading.</p>
-    <div id="reasonsList"></div>
-  </div>
-</div>
-
-<script src="dataSubmission.js"></script>
-<script>
-  function escapeHtml(value) {
-    return String(value ?? '')
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-  }
-
-  function pill(decision) {
-    if (decision === true) return '<span class="pill yes">Yes</span>';
-    if (decision === false) return '<span class="pill no">No</span>';
-    return '<span class="pill na">-</span>';
-  }
-
-  async function fetchJsonSafe(path) {
-    try {
-      const response = await fetch(path, { cache: 'no-store' });
-      if (!response.ok) return null;
-      return await response.json();
-    } catch (_error) {
-      return null;
+  <script src="dataSubmission.js"></script>
+  <script>
+    async function fetchJsonSafe(path) {
+      try {
+        const response = await fetch(path, { cache: 'no-store' });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (_error) {
+        return null;
+      }
     }
-  }
 
-  function downloadJson(filename, data) {
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-  }
+    const state = {
+      selectedConversationId: null,
+      selectedTurnNumber: null,
+      generalResponses: [],
+      professionalResponses: [],
+      aiRecords: [],
+      conversations: [],
+      completions: [],
+      qualifications: []
+    };
 
-  function renderSummary(responses, qualifications, completions) {
-    const generalResponses = responses.filter((r) => r.role === 'general');
-    const professionalResponses = responses.filter((r) => r.role === 'professional');
-    const uniqueParticipants = (list) => new Set(list.map((r) => r.participantId)).size;
-
-    document.getElementById('summary').innerHTML = `
-      <div class="stat"><span class="stat-label">Total responses</span><div class="stat-value">${responses.length}</div></div>
-      <div class="stat"><span class="stat-label">General participants</span><div class="stat-value">${uniqueParticipants(generalResponses)}</div></div>
-      <div class="stat"><span class="stat-label">Professional reviewers</span><div class="stat-value">${uniqueParticipants(professionalResponses)}</div></div>
-      <div class="stat"><span class="stat-label">Qualification records</span><div class="stat-value">${qualifications.length}</div></div>
-      <div class="stat"><span class="stat-label">Completed studies</span><div class="stat-value">${completions.filter((c) => c.completed).length}</div></div>
-    `;
-  }
-
-  function renderCompletionStatus(responses, completions) {
-    const roles = ['general', 'professional'];
-    const rows = roles.map((role) => {
-      const started = new Set(responses.filter((r) => r.role === role).map((r) => r.participantId));
-      const completed = new Set(completions.filter((c) => c.role === role && c.completed).map((c) => c.participantId));
-      return `
-        <tr>
-          <td>${role}</td>
-          <td>${started.size}</td>
-          <td>${completed.size}</td>
-          <td>${started.size ? Math.round((completed.size / started.size) * 100) + '%' : 'n/a'}</td>
-        </tr>
-      `;
-    }).join('');
-
-    document.getElementById('completionTable').innerHTML = `
-      <table>
-        <thead><tr><th>Role</th><th>Started</th><th>Completed</th><th>Completion rate</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    `;
-  }
-
-  function renderPostSurvey(postSurveys) {
-    if (!postSurveys.length) {
-      document.getElementById('postSurveyTable').innerHTML = '<div class="empty-state">No post-study survey responses recorded yet.</div>';
-      return;
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
-    const rows = postSurveys.map((s) => `
-      <tr>
-        <td>${escapeHtml(s.participantId)}</td>
-        <td>${escapeHtml(s.role)}</td>
-        <td>${escapeHtml(s.contactFrequencyPast3Years)}</td>
-        <td>${escapeHtml(s.firstContactResolutionFrequency)}</td>
-        <td>${escapeHtml(s.transferredBeforeResolutionFrequency)}</td>
-        <td>${escapeHtml(s.representativeCountBeforeResolution)}</td>
-        <td>${escapeHtml(s.overallSatisfaction)}</td>
-        <td>${escapeHtml(s.automatedSystemUsageFrequency)}</td>
-      </tr>
-    `).join('');
-    document.getElementById('postSurveyTable').innerHTML = `
-      <table>
-        <thead><tr>
-          <th>Participant ID</th><th>Role</th><th>Contact frequency (3yr)</th><th>First-contact resolution</th>
-          <th>Transferred before resolution</th><th>Rep count before resolution</th><th>Overall satisfaction</th><th>Automated system usage</th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    `;
-  }
 
-  function decisionsFor(responses, role, conversationId) {
-    return responses.filter((r) => r.role === role && r.conversationId === conversationId).map((r) => Boolean(r.handoffDecision));
-  }
+    function normalizeConversationId(value) {
+      return String(value ?? '').trim();
+    }
 
-  function handoffRateLabel(decisions) {
-    if (!decisions.length) return '<span class="muted">no responses</span>';
-    const yesCount = decisions.filter(Boolean).length;
-    return `${yesCount}/${decisions.length} Yes (${Math.round((yesCount / decisions.length) * 100)}%)`;
-  }
+    function getRoleResponses(items, role) {
+      return (Array.isArray(items) ? items : []).filter((entry) => String(entry.role || '').toLowerCase() === role);
+    }
 
-  function agreementRate(pairs) {
-    if (!pairs.length) return null;
-    const agree = pairs.filter(([a, b]) => a === b).length;
-    return Math.round((agree / pairs.length) * 100);
-  }
+    function uniqueParticipantIds(items, role) {
+      const set = new Set();
+      getRoleResponses(items, role).forEach((entry) => {
+        if (entry.participantId) set.add(String(entry.participantId));
+      });
+      return set.size;
+    }
 
-  function renderConversationTable(responses, aiRecords, conversationMeta) {
-    const aiByConv = new Map(aiRecords.map((r) => [String(r.conversationId), Boolean(r.aiHandoffDecision)]));
-    const conversationIds = conversationMeta.length
-      ? conversationMeta.map((c) => c.conversationId)
-      : [...new Set(responses.map((r) => r.conversationId))];
+    function pct(numerator, denominator) {
+      if (!denominator) return 0;
+      return Math.round((numerator / denominator) * 100);
+    }
 
-    const participantVsAiPairs = [];
-    const professionalVsAiPairs = [];
+    function formatPercent(numerator, denominator) {
+      if (!denominator) return '0%';
+      return `${pct(numerator, denominator)}%`;
+    }
 
-    const rows = conversationIds.map((conversationId) => {
-      const meta = conversationMeta.find((c) => c.conversationId === conversationId) || {};
-      const aiDecision = aiByConv.has(conversationId) ? aiByConv.get(conversationId) : null;
-      const generalDecisions = decisionsFor(responses, 'general', conversationId);
-      const professionalDecisions = decisionsFor(responses, 'professional', conversationId);
+    function toDecisionText(value) {
+      if (value === true) return 'Yes';
+      if (value === false) return 'No';
+      return '—';
+    }
 
-      if (aiDecision !== null) {
-        generalDecisions.forEach((d) => participantVsAiPairs.push([d, aiDecision]));
-        professionalDecisions.forEach((d) => professionalVsAiPairs.push([d, aiDecision]));
+    function summaryForRole(responses, role, conversationId) {
+      const filtered = (responses || []).filter((response) => {
+        const matchRole = String(response.role || '').toLowerCase() === role;
+        const matchConversation = normalizeConversationId(response.conversationId) === normalizeConversationId(conversationId);
+        return matchRole && matchConversation;
+      });
+
+      const yes = filtered.filter((response) => response.handoffDecision === true).length;
+      const no = filtered.filter((response) => response.handoffDecision === false).length;
+      return {
+        total: filtered.length,
+        yes,
+        no,
+        rate: filtered.length ? pct(yes, filtered.length) : 0,
+        majority: filtered.length ? (yes > no ? true : false) : null
+      };
+    }
+
+    function majorityDecision(values) {
+      if (!values.length) return null;
+      const yesCount = values.filter(Boolean).length;
+      const noCount = values.length - yesCount;
+      if (yesCount === noCount) return null;
+      return yesCount > noCount;
+    }
+
+    function getConversationDisplayNumber(conversationId) {
+      const context = state.conversations || [];
+      const index = context.findIndex((entry) => normalizeConversationId(entry.conversationId) === normalizeConversationId(conversationId));
+      return index >= 0 ? index + 1 : null;
+    }
+
+    function getOrderedConversationIds() {
+      return (state.conversations || [])
+        .map((conversation) => normalizeConversationId(conversation.conversationId))
+        .filter((conversationId) => conversationId !== '');
+    }
+
+    function selectConversation(conversationId) {
+      const nextId = normalizeConversationId(conversationId);
+      if (!nextId) return;
+      state.selectedConversationId = nextId;
+      state.selectedTurnNumber = null;
+      renderConversationTable();
+      renderExpandedDetails();
+    }
+
+    function buildSummaryMetrics() {
+      const generalResponses = getRoleResponses(state.generalResponses, 'general');
+      const professionalResponses = getRoleResponses(state.professionalResponses, 'professional');
+      const generalYes = generalResponses.filter((entry) => entry.handoffDecision === true).length;
+      const professionalYes = professionalResponses.filter((entry) => entry.handoffDecision === true).length;
+      const aiEscalatedCount = (state.aiRecords || []).filter((record) => record.aiHandoffDecision === true).length;
+
+      const generalCompleted = (() => {
+        const completed = (state.completions || []).filter((entry) => {
+          const role = String(entry.role || '').toLowerCase();
+          return role === 'general' && (entry.completed === true || entry.completionStatus === 'completed');
+        });
+        if (completed.length) return new Set(completed.map((entry) => String(entry.participantId))).size;
+        return uniqueParticipantIds(state.generalResponses, 'general');
+      })();
+
+      const professionalCompleted = (() => {
+        const completed = (state.completions || []).filter((entry) => {
+          const role = String(entry.role || '').toLowerCase();
+          return role === 'professional' && (entry.completed === true || entry.completionStatus === 'completed');
+        });
+        if (completed.length) return new Set(completed.map((entry) => String(entry.participantId))).size;
+        return uniqueParticipantIds(state.professionalResponses, 'professional');
+      })();
+
+      const conversationAgreementPairs = [];
+      const participantVsAiPairs = [];
+      const professionalVsAiPairs = [];
+
+      (state.conversations || []).forEach((conversation) => {
+        const conversationId = normalizeConversationId(conversation.conversationId);
+        const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
+        const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
+        const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
+        const aiDecision = aiRecord ? Boolean(aiRecord.aiHandoffDecision) : null;
+
+        if (participantSummary.total && professionalSummary.total) {
+          conversationAgreementPairs.push([
+            majorityDecision(Array.from({ length: participantSummary.total }, () => participantSummary.majority)),
+            majorityDecision(Array.from({ length: professionalSummary.total }, () => professionalSummary.majority))
+          ]);
+        }
+
+        if (participantSummary.total && aiDecision !== null) {
+          participantVsAiPairs.push([participantSummary.majority, aiDecision]);
+        }
+
+        if (professionalSummary.total && aiDecision !== null) {
+          professionalVsAiPairs.push([professionalSummary.majority, aiDecision]);
+        }
+      });
+
+      const participantProfessionalAgreement = conversationAgreementPairs.length
+        ? pct(conversationAgreementPairs.filter(([a, b]) => a === b).length, conversationAgreementPairs.length)
+        : 0;
+      const participantAiAgreement = participantVsAiPairs.length
+        ? pct(participantVsAiPairs.filter(([a, b]) => a === b).length, participantVsAiPairs.length)
+        : 0;
+      const professionalAiAgreement = professionalVsAiPairs.length
+        ? pct(professionalVsAiPairs.filter(([a, b]) => a === b).length, professionalVsAiPairs.length)
+        : 0;
+
+      return {
+        generalParticipants: generalCompleted,
+        professionalParticipants: professionalCompleted,
+        totalJudgments: generalResponses.length + professionalResponses.length,
+        participantHandoffRate: generalResponses.length ? pct(generalYes, generalResponses.length) : 0,
+        professionalHandoffRate: professionalResponses.length ? pct(professionalYes, professionalResponses.length) : 0,
+        aiEscalationRate: (state.aiRecords || []).length ? pct(aiEscalatedCount, (state.aiRecords || []).length) : 0,
+        participantProfessionalAgreement,
+        participantAiAgreement,
+        professionalAiAgreement
+      };
+    }
+
+    function renderSummaryCards() {
+      const metrics = buildSummaryMetrics();
+      const cards = [
+        { label: 'Completed General Participants', value: metrics.generalParticipants, subtext: 'general role' },
+        { label: 'Completed Professional Reviewers', value: metrics.professionalParticipants, subtext: 'professional role' },
+        { label: 'Total Conversation Judgments', value: metrics.totalJudgments, subtext: 'all submitted decisions' },
+        { label: 'Overall Participant Handoff Rate', value: `${metrics.participantHandoffRate}%`, subtext: `${formatPercent(metrics.participantHandoffRate, 100)} of general responses` },
+        { label: 'Overall Professional Handoff Rate', value: `${metrics.professionalHandoffRate}%`, subtext: `${formatPercent(metrics.professionalHandoffRate, 100)} of professional responses` },
+        { label: 'Overall AI Escalation Rate', value: `${metrics.aiEscalationRate}%`, subtext: 'precomputed AI decisions' },
+        { label: 'Participant vs Professional Agreement', value: `${metrics.participantProfessionalAgreement}%`, subtext: 'majority decision match' },
+        { label: 'Participant vs AI Agreement', value: `${metrics.participantAiAgreement}%`, subtext: 'majority vs AI' },
+        { label: 'Professional vs AI Agreement', value: `${metrics.professionalAiAgreement}%`, subtext: 'majority vs AI' }
+      ];
+
+      document.getElementById('summaryGrid').innerHTML = cards.map((card) => `
+        <div class="stat">
+          <span class="stat-label">${escapeHtml(card.label)}</span>
+          <div class="stat-value">${escapeHtml(card.value)}</div>
+          <div class="stat-subtext">${escapeHtml(card.subtext)}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderConversationTable() {
+      const conversationIds = (state.conversations || []).map((conversation) => normalizeConversationId(conversation.conversationId));
+      if (!conversationIds.length) {
+        document.getElementById('conversationTableWrap').innerHTML = '<div class="empty-state">No study conversations were found.</div>';
+        return;
       }
 
-      return `
-        <tr>
-          <td>${escapeHtml(conversationId)}</td>
-          <td>${escapeHtml(meta.issueType || '')}</td>
-          <td>${pill(aiDecision)}</td>
-          <td>${handoffRateLabel(generalDecisions)}</td>
-          <td>${handoffRateLabel(professionalDecisions)}</td>
-        </tr>
+      const rows = conversationIds.map((conversationId) => {
+        const conversation = (state.conversations || []).find((item) => normalizeConversationId(item.conversationId) === conversationId) || {};
+        const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
+        const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
+        const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
+        const aiDecision = aiRecord && aiRecord.aiHandoffDecision !== undefined ? aiRecord.aiHandoffDecision : null;
+        const professionalText = professionalSummary.total
+          ? `${professionalSummary.yes}/${professionalSummary.total} Yes • ${professionalSummary.no}/${professionalSummary.total} No`
+          : 'No professional responses';
+        const escalationTurn = aiRecord && aiRecord.escalationTurn !== null && aiRecord.escalationTurn !== undefined ? aiRecord.escalationTurn : '—';
+        const participantMajority = participantSummary.total ? (participantSummary.yes > participantSummary.no ? true : false) : null;
+        const professionalMajority = professionalSummary.total ? (professionalSummary.yes > professionalSummary.no ? true : false) : null;
+        const agreement = (() => {
+          if (participantMajority === null || professionalMajority === null || aiDecision === null) return '—';
+          const t = [participantMajority === aiDecision, professionalMajority === aiDecision].filter(Boolean).length;
+          return `${t}/2 aligned`;
+        })();
+        const displayIndex = getConversationDisplayNumber(conversationId);
+
+        return `
+          <tr class="conversation-row ${state.selectedConversationId === conversationId ? 'selected' : ''}" data-conversation-id="${escapeHtml(conversationId)}" tabindex="0">
+            <td><strong>${escapeHtml(displayIndex !== null ? String(displayIndex) : conversationId)}</strong></td>
+            <td>${participantSummary.total ? participantSummary.yes : 0}</td>
+            <td>${participantSummary.total ? participantSummary.no : 0}</td>
+            <td>${participantSummary.total ? `${participantSummary.rate}%` : '0%'}</td>
+            <td>${escapeHtml(professionalText)}</td>
+            <td>${aiDecision === null ? '<span class="pill neutral">—</span>' : `<span class="pill ${aiDecision ? 'ai' : 'yes'}">${aiDecision ? 'Escalated' : 'Not Escalated'}</span>`}</td>
+            <td>${escapeHtml(String(escalationTurn))}</td>
+            <td>${escapeHtml(agreement)}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('conversationTableWrap').innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Conversation ID</th>
+              <th>Participant Yes</th>
+              <th>Participant No</th>
+              <th>Participant Handoff %</th>
+              <th>Professional Reviewer Decision</th>
+              <th>AI Decision</th>
+              <th>AI Escalation Turn</th>
+              <th>Agreement / Disagreement</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
       `;
-    }).join('');
 
-    const participantAgreement = agreementRate(participantVsAiPairs);
-    const professionalAgreement = agreementRate(professionalVsAiPairs);
-
-    document.getElementById('conversationTable').innerHTML = `
-      <p class="muted">
-        Participant-vs-AI agreement: <strong>${participantAgreement === null ? 'n/a' : participantAgreement + '%'}</strong>
-        &nbsp;|&nbsp; Professional-vs-AI agreement: <strong>${professionalAgreement === null ? 'n/a' : professionalAgreement + '%'}</strong>
-      </p>
-      <table>
-        <thead><tr><th>Conversation</th><th>Issue type</th><th>AI decision</th><th>General handoff rate</th><th>Professional handoff rate</th></tr></thead>
-        <tbody>${rows || '<tr><td colspan="5" class="empty-state">No conversations found.</td></tr>'}</tbody>
-      </table>
-    `;
-  }
-
-  function renderQualifications(qualifications) {
-    if (!qualifications.length) {
-      document.getElementById('qualificationsTable').innerHTML = '<div class="empty-state">No professional reviewer qualifications recorded yet.</div>';
-      return;
+      document.querySelectorAll('.conversation-row').forEach((row) => {
+        row.addEventListener('click', () => {
+          const id = row.getAttribute('data-conversation-id');
+          state.selectedConversationId = id;
+          state.selectedTurnNumber = null;
+          renderConversationTable();
+          renderExpandedDetails();
+        });
+      });
     }
-    const rows = qualifications.map((q) => `
-      <tr>
-        <td>${escapeHtml(q.participantId)}</td>
-        <td>${escapeHtml(q.jobTitle)}</td>
-        <td>${escapeHtml(q.yearsExperience)}</td>
-        <td>${escapeHtml(q.industry)}</td>
-        <td>${q.hasMadeHandoffDecisions ? 'Yes' : 'No'}</td>
-        <td>${escapeHtml(q.submittedAt)}</td>
-      </tr>
-    `).join('');
-    document.getElementById('qualificationsTable').innerHTML = `
-      <table>
-        <thead><tr><th>Participant ID</th><th>Job title</th><th>Years experience</th><th>Industry</th><th>Made handoff decisions?</th><th>Submitted at</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    `;
-  }
 
-  function renderReasons(responses) {
-    const withReasons = responses.filter((r) => r.optionalReason && r.optionalReason.trim());
-    if (!withReasons.length) {
-      document.getElementById('reasonsList').innerHTML = '<div class="empty-state">No written explanations recorded yet.</div>';
-      return;
+    function renderSentimentChart(turnAnalysis, escalationTurn) {
+      if (!turnAnalysis || !turnAnalysis.length) {
+        return '<div class="empty-state">No sentiment chart available for this conversation.</div>';
+      }
+
+      const width = 620;
+      const height = 220;
+      const margin = { top: 15, right: 15, bottom: 28, left: 38 };
+      const minY = -1;
+      const maxY = 1;
+      const points = turnAnalysis.map((entry, index) => {
+        const x = margin.left + (index / Math.max(turnAnalysis.length - 1, 1)) * (width - margin.left - margin.right);
+        const normalized = (entry.sentimentScore - minY) / (maxY - minY);
+        const y = height - margin.bottom - (normalized * (height - margin.top - margin.bottom));
+        return { ...entry, x, y, index };
+      });
+
+      const path = points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`).join(' ');
+      const selectedTurnNumber = state.selectedTurnNumber || (escalationTurn || points[0]?.turnNumber);
+      const selectedPoint = points.find((point) => Number(point.turnNumber) === Number(selectedTurnNumber)) || points[0];
+      const markerX = escalationTurn ? points.find((point) => Number(point.turnNumber) === Number(escalationTurn))?.x : null;
+
+      const yTicks = [-1, -0.5, 0, 0.5, 1];
+      const yGrid = yTicks.map((tick) => {
+        const normal = (tick - minY) / (maxY - minY);
+        const y = height - margin.bottom - (normal * (height - margin.top - margin.bottom));
+        return `<line x1="${margin.left}" x2="${width - margin.right}" y1="${y}" y2="${y}" stroke="#e5e7eb" stroke-dasharray="4 4" />`;
+      }).join('');
+
+      const xLabels = points.map((point) => {
+        const x = point.x;
+        return `<text x="${x}" y="${height - 8}" text-anchor="middle" font-size="10" fill="#6b7280">${point.customerTurn}</text>`;
+      }).join('');
+
+      const yLabels = yTicks.map((tick) => {
+        const normal = (tick - minY) / (maxY - minY);
+        const y = height - margin.bottom - (normal * (height - margin.top - margin.bottom));
+        return `<text x="10" y="${y + 4}" font-size="10" fill="#6b7280">${tick.toFixed(1)}</text>`;
+      }).join('');
+
+      return `
+        <div class="chart-wrap">
+          <div class="chart-label">
+            <span>Sentiment over customer turns</span>
+            <span>${escalationTurn ? `Escalation turn: ${escalationTurn}` : 'No escalation turn'}</span>
+          </div>
+          <svg viewBox="0 0 ${width} ${height}" width="100%" height="220" role="img" aria-label="Sentiment over time chart">
+            ${yGrid}
+            <line x1="${margin.left}" x2="${width - margin.right}" y1="${height - margin.bottom}" y2="${height - margin.bottom}" stroke="#cbd5e1" />
+            <line x1="${margin.left}" x2="${margin.left}" y1="${margin.top}" y2="${height - margin.bottom}" stroke="#cbd5e1" />
+            <path d="${path}" fill="none" stroke="#4f46e5" stroke-width="2.5" />
+            ${points.map((point) => `<circle class="chart-point" data-turn-number="${escapeHtml(point.turnNumber)}" cx="${point.x}" cy="${point.y}" r="${selectedPoint && Number(point.turnNumber) === Number(selectedPoint.turnNumber) ? '5' : '3.5'}" fill="${selectedPoint && Number(point.turnNumber) === Number(selectedPoint.turnNumber) ? '#f59e0b' : '#4f46e5'}" style="cursor:pointer;" />`).join('')}
+            ${markerX !== null ? `<line x1="${markerX}" x2="${markerX}" y1="${margin.top}" y2="${height - margin.bottom}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4" />` : ''}
+            ${markerX !== null ? `<rect x="${markerX - 22}" y="${margin.top - 2}" width="44" height="18" fill="#ef4444" rx="8" /><text x="${markerX}" y="${margin.top + 10}" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">AI</text>` : ''}
+            ${xLabels}
+            ${yLabels}
+          </svg>
+        </div>
+      `;
     }
-    document.getElementById('reasonsList').innerHTML = withReasons.map((r) => `
-      <div class="reason-item">
-        <div class="muted">${escapeHtml(r.participantId)} (${escapeHtml(r.role)}) - conversation ${escapeHtml(r.conversationId)} - decision: ${r.handoffDecision ? 'Transfer to human' : 'Continue automated'}</div>
-        <div>${escapeHtml(r.optionalReason)}</div>
-      </div>
-    `).join('');
-  }
 
-  async function loadAll() {
-    const [responses, qualifications, postSurveys, completions] = await Promise.all([
-      loadStoredCollection(RESPONSES_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.responsesTable),
-      loadStoredCollection(QUALIFICATIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.qualificationsTable),
-      loadStoredCollection(POST_SURVEY_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.postSurveyTable),
-      loadStoredCollection(COMPLETIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.completionTable)
-    ]);
-    return { responses, qualifications, postSurveys, completions };
-  }
+    function renderEmotionBreakdown(selectedAnalysis) {
+      if (!selectedAnalysis) {
+        return '<div class="empty-state">No AI analysis is available for the selected customer turn.</div>';
+      }
 
-  async function render() {
-    const { responses, qualifications, postSurveys, completions } = await loadAll();
-    const aiRecords = (await fetchJsonSafe('research/ai_analysis_25.json')) || [];
-    const conversationMeta = (await fetchJsonSafe('research/study_conversations.json')) || [];
+      const rawEmotions = Array.isArray(selectedAnalysis.rawGoEmotions) ? selectedAnalysis.rawGoEmotions : [];
+      const sorted = [...rawEmotions].sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
+      const maxScore = sorted.length ? Math.max(...sorted.map((emotion) => Number(emotion.score || 0))) : 0;
 
-    renderSummary(responses, qualifications, completions);
-    renderCompletionStatus(responses, completions);
-    renderConversationTable(responses, aiRecords, conversationMeta);
-    renderQualifications(qualifications);
-    renderPostSurvey(postSurveys);
-    renderReasons(responses);
-  }
+      const barRows = sorted.slice(0, 12).map((emotion) => {
+        const width = maxScore ? (Number(emotion.score || 0) / maxScore) * 100 : 0;
+        return `
+          <div class="bar-row">
+            <span>${escapeHtml(emotion.label)}</span>
+            <div class="bar-track"><div class="bar-fill" style="width:${width}%"></div></div>
+            <strong>${Number(emotion.score || 0).toFixed(4)}</strong>
+          </div>
+        `;
+      }).join('');
 
-  document.getElementById('exportResponsesButton').addEventListener('click', async () => {
-    downloadJson('study_responses.json', await loadStoredCollection(RESPONSES_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.responsesTable));
-  });
-  document.getElementById('exportQualificationsButton').addEventListener('click', async () => {
-    downloadJson('study_qualifications.json', await loadStoredCollection(QUALIFICATIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.qualificationsTable));
-  });
-  document.getElementById('refreshButton').addEventListener('click', render);
-  document.getElementById('clearButton').addEventListener('click', () => {
-    if (!confirm('Clear all responses, qualifications, survey answers, and completion records saved in this browser? This cannot be undone. (Does not delete anything already sent to a remote database.)')) return;
-    localStorage.removeItem(RESPONSES_STORAGE_KEY);
-    localStorage.removeItem(QUALIFICATIONS_STORAGE_KEY);
-    localStorage.removeItem(POST_SURVEY_STORAGE_KEY);
-    localStorage.removeItem(COMPLETIONS_STORAGE_KEY);
-    render();
-  });
+      const mappedScores = selectedAnalysis.mappedEmotionScores || {};
+      const mappedDimensions = [
+        ['anger', mappedScores.anger],
+        ['frustration', mappedScores.frustration],
+        ['negativeIntensity', mappedScores.negativeIntensity],
+        ['positiveIntensity', mappedScores.positiveIntensity],
+        ['joy', mappedScores.joy],
+        ['sadness', mappedScores.sadness],
+        ['surprise', mappedScores.surprise],
+        ['trust', mappedScores.trust]
+      ].filter(([, value]) => value !== undefined && value !== null);
 
-  render();
-</script>
+      const dimensionsHtml = mappedDimensions.map(([label, value]) => `
+        <div class="dimension-box">
+          <strong>${escapeHtml(label)}</strong>
+          <div>${Number(value).toFixed(4)}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="emotion-list">
+          <h3>Selected customer turn analysis</h3>
+          <div class="mini-metrics">
+            <div class="mini-metric"><strong>Sentiment label</strong>${escapeHtml(selectedAnalysis.sentimentLabel || '—')}</div>
+            <div class="mini-metric"><strong>Sentiment score</strong>${Number(selectedAnalysis.sentimentScore || 0).toFixed(4)}</div>
+            <div class="mini-metric"><strong>Escalation risk</strong>${Number(selectedAnalysis.escalationRisk || 0).toFixed(4)}</div>
+            <div class="mini-metric"><strong>Escalated this turn</strong>${selectedAnalysis.escalatedOnThisTurn ? 'Yes' : 'No'}</div>
+          </div>
+          ${barRows ? `<div style="margin-top:12px;">${barRows}</div>` : '<div class="empty-state">No raw GoEmotions data available.</div>'}
+          <div class="dimension-grid">${dimensionsHtml}</div>
+        </div>
+      `;
+    }
+
+    function renderExpandedDetails() {
+      const conversationId = state.selectedConversationId;
+      const container = document.getElementById('analysisDetail');
+      if (!conversationId) {
+        container.innerHTML = '<div class="empty-state">Select a conversation from the table to inspect the transcript, AI analysis, and escalation markers.</div>';
+        return;
+      }
+
+      const conversation = (state.conversations || []).find((item) => normalizeConversationId(item.conversationId) === conversationId);
+      const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
+      const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
+      const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
+      const customerTurns = Array.isArray(conversation?.turns) ? conversation.turns.filter((turn) => turn.role === 'customer') : [];
+      const escalationTurn = aiRecord && (aiRecord.escalationTurn !== null && aiRecord.escalationTurn !== undefined) ? Number(aiRecord.escalationTurn) : null;
+      const defaultSelectedTurn = escalationTurn || (customerTurns[0] ? Number(customerTurns[0].turnNumber) : null);
+      state.selectedTurnNumber = state.selectedTurnNumber || defaultSelectedTurn;
+      const selectedTurn = Number(state.selectedTurnNumber) || null;
+      const selectedAnalysis = aiRecord?.customerTurnAnalysis?.find((entry) => Number(entry.turnNumber) === Number(selectedTurn)) || aiRecord?.customerTurnAnalysis?.[0] || null;
+
+      const transcriptMarkup = (Array.isArray(conversation?.turns) ? conversation.turns : []).map((turn) => {
+        const isCustomer = turn.role === 'customer';
+        const analysis = aiRecord && Array.isArray(aiRecord.customerTurnAnalysis)
+          ? aiRecord.customerTurnAnalysis.find((entry) => Number(entry.turnNumber) === Number(turn.turnNumber))
+          : null;
+        const isEscalationTurn = escalationTurn && Number(turn.turnNumber) === Number(escalationTurn);
+        const isSelectedTurn = isCustomer && Number(turn.turnNumber) === Number(selectedTurn);
+
+        let analysisMarkup = '';
+        if (isCustomer && analysis) {
+          const triggers = Array.isArray(analysis.escalationTriggers) && analysis.escalationTriggers.length
+            ? analysis.escalationTriggers.map((trigger) => `<span class="trigger">${escapeHtml(trigger)}</span>`).join('')
+            : '<span class="trigger">No escalation triggers</span>';
+
+          analysisMarkup = `
+            <div class="turn-analysis">
+              <div class="mini-metrics">
+                <div class="mini-metric"><strong>Overall sentiment</strong>${escapeHtml(analysis.sentimentLabel || '—')}</div>
+                <div class="mini-metric"><strong>Sentiment score</strong>${Number(analysis.sentimentScore || 0).toFixed(4)}</div>
+                <div class="mini-metric"><strong>Escalation risk</strong>${Number(analysis.escalationRisk || 0).toFixed(4)}</div>
+                <div class="mini-metric"><strong>Human request</strong>${analysis.humanRequest ? 'Yes' : 'No'}</div>
+              </div>
+              <div class="trigger-list">${triggers}</div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="turn ${isCustomer ? 'customer' : 'agent'} ${isEscalationTurn ? 'escalation' : ''} ${isSelectedTurn ? 'selected' : ''}">
+            <div class="turn-meta">
+              <span>${isCustomer ? 'Customer' : 'Agent'} ${isCustomer ? `turn ${turn.turnNumber}` : ''}</span>
+              ${isEscalationTurn ? '<span class="pill danger">AI escalation turn</span>' : ''}
+            </div>
+            <div class="turn-text">${escapeHtml(turn.text || '')}</div>
+            ${analysisMarkup}
+          </div>
+        `;
+      }).join('');
+
+      const participantYes = participantSummary.total ? `${participantSummary.yes}/${participantSummary.total}` : '0/0';
+      const participantNo = participantSummary.total ? `${participantSummary.no}/${participantSummary.total}` : '0/0';
+      const professionalYes = professionalSummary.total ? `${professionalSummary.yes}/${professionalSummary.total}` : '0/0';
+      const professionalNo = professionalSummary.total ? `${professionalSummary.no}/${professionalSummary.total}` : '0/0';
+      const aiStatus = aiRecord ? (aiRecord.aiHandoffDecision ? 'Escalated' : 'Not Escalated') : 'No AI result';
+      const aiBadgeClass = aiRecord && aiRecord.aiHandoffDecision ? 'danger' : 'yes';
+      const orderedConversationIds = getOrderedConversationIds();
+      const currentConversationIndex = orderedConversationIds.indexOf(conversationId);
+      const previousConversationId = currentConversationIndex > 0 ? orderedConversationIds[currentConversationIndex - 1] : orderedConversationIds[orderedConversationIds.length - 1] || conversationId;
+      const nextConversationId = currentConversationIndex >= 0 && currentConversationIndex < orderedConversationIds.length - 1 ? orderedConversationIds[currentConversationIndex + 1] : orderedConversationIds[0] || conversationId;
+
+      const displayConversationNumber = getConversationDisplayNumber(conversationId);
+      const selectedSummary = `
+        <div class="analysis-header">
+          <div>
+            <h2>Conversation ${escapeHtml(displayConversationNumber !== null ? String(displayConversationNumber) : conversationId)}</h2>
+            <div class="muted">${escapeHtml(conversation?.issueType || 'No issue metadata')} • ${escapeHtml(conversation?.product || 'Product unavailable')}</div>
+          </div>
+          <div class="conversation-nav">
+            <button type="button" class="secondary nav-button" data-direction="prev" data-conversation-id="${escapeHtml(previousConversationId)}">Prev</button>
+            <div class="conversation-bubbles">
+              ${orderedConversationIds.map((id, index) => `
+                <button
+                  type="button"
+                  class="conversation-bubble ${normalizeConversationId(id) === normalizeConversationId(conversationId) ? 'selected' : ''}"
+                  data-conversation-id="${escapeHtml(id)}"
+                  aria-label="Open conversation ${index + 1}"
+                >${index + 1}</button>
+              `).join('')}
+            </div>
+            <button type="button" class="secondary nav-button" data-direction="next" data-conversation-id="${escapeHtml(nextConversationId)}">Next</button>
+          </div>
+          <div class="summary-badges">
+            <span class="pill ${aiBadgeClass}">AI Decision: ${escapeHtml(aiStatus)}</span>
+            ${escalationTurn ? `<span class="pill warning">Escalation turn ${escapeHtml(String(escalationTurn))}</span>` : '<span class="pill neutral">No escalation turn</span>'}
+          </div>
+        </div>
+        <div class="mini-metrics" style="margin-bottom:18px;">
+          <div class="mini-metric"><strong>Participant Yes</strong>${escapeHtml(participantYes)}</div>
+          <div class="mini-metric"><strong>Participant No</strong>${escapeHtml(participantNo)}</div>
+          <div class="mini-metric"><strong>Participant Handoff Rate</strong>${participantSummary.total ? `${participantSummary.rate}%` : '0%'}</div>
+          <div class="mini-metric"><strong>Professional Yes</strong>${escapeHtml(professionalYes)}</div>
+          <div class="mini-metric"><strong>Professional No</strong>${escapeHtml(professionalNo)}</div>
+          <div class="mini-metric"><strong>Professional Rate</strong>${professionalSummary.total ? `${professionalSummary.rate}%` : '0%'}</div>
+        </div>
+      `;
+
+      const turnList = Array.isArray(aiRecord?.customerTurnAnalysis) ? aiRecord.customerTurnAnalysis : [];
+      const selectedPanel = renderEmotionBreakdown(selectedAnalysis);
+      const chart = renderSentimentChart(turnList, escalationTurn);
+
+      const selectedTurnInfo = selectedAnalysis ? `
+        <div class="analysis-panel">
+          <h3>AI Escalation Marker</h3>
+          <div class="mini-metrics">
+            <div class="mini-metric"><strong>AI decision</strong>${selectedAnalysis.escalatedOnThisTurn ? 'Escalated on this turn' : 'No escalation on this turn'}</div>
+            <div class="mini-metric"><strong>Customer turn</strong>${selectedAnalysis.customerTurn}</div>
+            <div class="mini-metric"><strong>Trigger(s)</strong>${Array.isArray(selectedAnalysis.escalationTriggers) && selectedAnalysis.escalationTriggers.length ? escapeHtml(selectedAnalysis.escalationTriggers.join(', ')) : 'None'}</div>
+            <div class="mini-metric"><strong>Risk score</strong>${Number(selectedAnalysis.escalationRisk || 0).toFixed(4)}</div>
+          </div>
+          <div class="turn-text" style="margin-top:12px;">${escapeHtml(selectedAnalysis.customerMessage || '')}</div>
+          <div class="trigger-list" style="margin-top:12px;">
+            ${selectedAnalysis.escalationTriggers && selectedAnalysis.escalationTriggers.length
+              ? selectedAnalysis.escalationTriggers.map((trigger) => `<span class="trigger">${escapeHtml(trigger)}</span>`).join('')
+              : '<span class="trigger">No escalation rule triggered</span>'}
+          </div>
+        </div>
+      ` : '<div class="analysis-panel"><h3>AI Escalation Marker</h3><div class="empty-state">This conversation has no customer-turn AI results.</div></div>';
+
+      container.innerHTML = `
+        ${selectedSummary}
+        <div class="analysis-layout">
+          <div class="insight-panel" style="grid-column: 1 / -1;">
+            ${chart}
+            ${selectedTurnInfo}
+            ${selectedPanel}
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll('.chart-point').forEach((point) => {
+        point.addEventListener('click', () => {
+          const turnNumber = Number(point.getAttribute('data-turn-number'));
+          state.selectedTurnNumber = turnNumber;
+          renderExpandedDetails();
+        });
+      });
+
+      container.querySelectorAll('[data-direction]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextConversationId = button.getAttribute('data-conversation-id');
+          if (nextConversationId) {
+            selectConversation(nextConversationId);
+          }
+        });
+      });
+
+      container.querySelectorAll('.conversation-bubble').forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextConversationId = button.getAttribute('data-conversation-id');
+          if (nextConversationId) {
+            selectConversation(nextConversationId);
+          }
+        });
+      });
+    }
+
+    async function initialize() {
+      const [responses, qualifications, postSurveys, completions] = await Promise.all([
+        loadStoredCollection(RESPONSES_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.responsesTable),
+        loadStoredCollection(QUALIFICATIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.qualificationsTable),
+        loadStoredCollection(POST_SURVEY_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.postSurveyTable),
+        loadStoredCollection(COMPLETIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.completionTable)
+      ]);
+
+      state.generalResponses = getRoleResponses(responses, 'general');
+      state.professionalResponses = getRoleResponses(responses, 'professional');
+      state.qualifications = qualifications;
+      state.completions = completions;
+      state.aiRecords = (await fetchJsonSafe('research/ai_analysis_25.json')) || [];
+      state.conversations = (await fetchJsonSafe('research/study_conversations.json')) || [];
+      state.selectedConversationId = state.conversations.length ? normalizeConversationId(state.conversations[0].conversationId) : null;
+      state.selectedTurnNumber = null;
+
+      renderSummaryCards();
+      renderConversationTable();
+      renderExpandedDetails();
+    }
+
+    document.getElementById('refreshButton').addEventListener('click', initialize);
+    initialize();
+  </script>
 </body>
 </html>

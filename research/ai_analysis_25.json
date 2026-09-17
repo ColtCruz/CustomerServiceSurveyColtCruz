@@ -9,9 +9,12 @@
     "confusion": 0,
     "escalationRisk": 0.0062,
     "highestEscalationRisk": 0.0283,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -304,8 +307,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.052199999999999996,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -907,9 +913,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.1048,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -1202,8 +1211,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.2598,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -1805,9 +1817,12 @@
     "confusion": 0,
     "escalationRisk": 0.0113,
     "highestEscalationRisk": 0.0952,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -2100,8 +2115,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.0269,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -2703,9 +2721,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.0589,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -2998,8 +3019,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.9499,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -3601,9 +3625,12 @@
     "confusion": 0,
     "escalationRisk": 0.1803,
     "highestEscalationRisk": 0.1803,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -3896,8 +3923,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.7752000000000001,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -4502,7 +4532,8 @@
     "aiHandoffDecision": true,
     "escalationTurn": 3,
     "escalationTriggers": [
-      "sentiment drop <= -0.50"
+      "customer escalation requested",
+      "policy threshold exceeded"
     ],
     "customerTurnAnalysis": [
       {
@@ -4796,8 +4827,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.5871,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -4943,10 +4977,8 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.6667000000000001,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "sentiment drop <= -0.50"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": []
       },
       {
         "turnNumber": 7,
@@ -5401,9 +5433,12 @@
     "confusion": 0,
     "escalationRisk": 0.1803,
     "highestEscalationRisk": 0.1803,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -5696,8 +5731,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.011100000000000027,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -6299,9 +6337,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.0317,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -6594,8 +6635,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.10889999999999998,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -7197,9 +7241,12 @@
     "confusion": 0,
     "escalationRisk": 0.0113,
     "highestEscalationRisk": 0.0422,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -7492,8 +7539,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.1196000000000002,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -8095,9 +8145,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.6095,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -8390,8 +8443,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.9392,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -8993,9 +9049,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.0226,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -9288,8 +9347,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.2177,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -9891,9 +9953,12 @@
     "confusion": 0,
     "escalationRisk": 0.0062,
     "highestEscalationRisk": 0.0291,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 3,
+    "escalationTriggers": [
+      "customer escalation requested",
+      "policy threshold exceeded"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -10186,8 +10251,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8137,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "customer escalation requested",
+          "policy threshold exceeded"
+        ]
       },
       {
         "turnNumber": 5,
@@ -16177,11 +16245,9 @@
     "confusion": 0,
     "escalationRisk": 0.0381,
     "highestEscalationRisk": 0.6881,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "sentiment drop <= -0.50"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -16621,10 +16687,8 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.9082,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "sentiment drop <= -0.50"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": []
       },
       {
         "turnNumber": 7,
@@ -17977,11 +18041,9 @@
     "confusion": 0,
     "escalationRisk": 0.0381,
     "highestEscalationRisk": 0.0381,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "sentiment drop <= -0.50"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -18421,10 +18483,8 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.9082,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "sentiment drop <= -0.50"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": []
       },
       {
         "turnNumber": 7,
@@ -21573,11 +21633,9 @@
     "confusion": 0,
     "escalationRisk": 0.0381,
     "highestEscalationRisk": 0.0381,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "sentiment drop <= -0.50"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -22017,10 +22075,8 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.6667000000000001,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "sentiment drop <= -0.50"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": []
       },
       {
         "turnNumber": 7,
