@@ -12,6 +12,7 @@ const STUDY_MODE = new URLSearchParams(window.location.search).get('mode') === '
   ? 'professional'
   : 'general';
 const STUDY_CONVERSATIONS_URL = 'research/study_conversations.json';
+const GENERAL_SURVEY_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeL3dvj2Db0DxrW9GTq37_ZCjHDpAc8_JJxE5fQgwzaKCBBVw/viewform?usp=header';
 
 let participantId = null;
 let studyConversations = [];
@@ -78,6 +79,38 @@ function showStudyUnavailable(message) {
   const text = document.getElementById('studyUnavailableMessage');
   if (text) text.textContent = message;
   showCard('studyUnavailableCard');
+}
+
+function prepareCompletionCard() {
+  const doneCard = document.getElementById('doneCard');
+  if (!doneCard || STUDY_MODE !== 'general' || document.getElementById('generalSurveyLink')) return;
+
+  const prompt = document.createElement('p');
+  prompt.textContent = 'Please complete the short general customer-service survey to finish the study.';
+
+  const link = document.createElement('a');
+  link.id = 'generalSurveyLink';
+  link.href = GENERAL_SURVEY_URL;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = 'Complete General Customer Service Survey';
+  link.style.display = 'inline-block';
+  link.style.background = '#2563eb';
+  link.style.color = '#ffffff';
+  link.style.textDecoration = 'none';
+  link.style.padding = '12px 18px';
+  link.style.borderRadius = '8px';
+  link.style.fontWeight = '600';
+  link.style.marginTop = '8px';
+
+  const note = document.createElement('p');
+  note.className = 'small';
+  note.textContent = 'The survey will open in a new tab.';
+  note.style.marginTop = '12px';
+
+  doneCard.appendChild(prompt);
+  doneCard.appendChild(link);
+  doneCard.appendChild(note);
 }
 
 // ───────── Consent ─────────
@@ -265,6 +298,7 @@ async function handlePostSurveySubmit() {
     completedAt: new Date().toISOString()
   });
 
+  prepareCompletionCard();
   showCard('doneCard');
 }
 
