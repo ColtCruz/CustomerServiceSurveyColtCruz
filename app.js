@@ -2,10 +2,12 @@
 // App
 //
 // DOM wiring for chatScreen.html's participant/professional-reviewer study.
-// Flow: Consent -> (professional mode only) Qualification -> Instructions ->
-// 25 conversations, one at a time -> Completion. No AI analysis is ever
-// computed or shown here - that runs offline, once, via
-// research/precompute_ai_analysis.js. See dataSubmission.js for storage.
+// General participant flow: Consent -> Instructions -> 25 conversations ->
+// external Google Form survey -> Google Form confirmation (done).
+// Professional reviewer flow: Consent -> Qualification -> Instructions ->
+// 25 conversations -> Completion.
+// No AI analysis is ever computed or shown here - that runs offline, once,
+// via research/precompute_ai_analysis.js. See dataSubmission.js for storage.
 // ─────────────────────────────────────────────────────────────────────
 
 const STUDY_MODE = new URLSearchParams(window.location.search).get('mode') === 'professional'
@@ -79,38 +81,6 @@ function showStudyUnavailable(message) {
   const text = document.getElementById('studyUnavailableMessage');
   if (text) text.textContent = message;
   showCard('studyUnavailableCard');
-}
-
-function prepareCompletionCard() {
-  const doneCard = document.getElementById('doneCard');
-  if (!doneCard || STUDY_MODE !== 'general' || document.getElementById('generalSurveyLink')) return;
-
-  const prompt = document.createElement('p');
-  prompt.textContent = 'Please complete the short general customer-service survey to finish the study.';
-
-  const link = document.createElement('a');
-  link.id = 'generalSurveyLink';
-  link.href = GENERAL_SURVEY_URL;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = 'Complete General Customer Service Survey';
-  link.style.display = 'inline-block';
-  link.style.background = '#2563eb';
-  link.style.color = '#ffffff';
-  link.style.textDecoration = 'none';
-  link.style.padding = '12px 18px';
-  link.style.borderRadius = '8px';
-  link.style.fontWeight = '600';
-  link.style.marginTop = '8px';
-
-  const note = document.createElement('p');
-  note.className = 'small';
-  note.textContent = 'The survey will open in a new tab.';
-  note.style.marginTop = '12px';
-
-  doneCard.appendChild(prompt);
-  doneCard.appendChild(link);
-  doneCard.appendChild(note);
 }
 
 // ───────── Consent ─────────
@@ -213,7 +183,7 @@ function renderConversationCard() {
   `;
 
   if (nextButton) {
-    nextButton.textContent = currentConversationIndex === total - 1 ? 'Finish Review' : 'Next Conversation';
+    nextButton.textContent = currentConversationIndex === total - 1 ? 'Continue to Survey' : 'Next Conversation';
     nextButton.disabled = true;
   }
 
@@ -257,39 +227,6 @@ async function handleReviewAdvance() {
     return;
   }
 
-  showCard('postSurveyCard');
-}
-
-// ───────── Post-study survey ─────────
-
-const POST_SURVEY_QUESTION_FIELDS = [
-  ['postSurveyQ1', 'contactFrequencyPast3Years'],
-  ['postSurveyQ2', 'firstContactResolutionFrequency'],
-  ['postSurveyQ3', 'transferredBeforeResolutionFrequency'],
-  ['postSurveyQ4', 'representativeCountBeforeResolution'],
-  ['postSurveyQ5', 'overallSatisfaction'],
-  ['postSurveyQ6', 'automatedSystemUsageFrequency']
-];
-
-async function handlePostSurveySubmit() {
-  const answers = {};
-  for (const [radioName, fieldName] of POST_SURVEY_QUESTION_FIELDS) {
-    const checked = document.querySelector(`input[name="${radioName}"]:checked`);
-    if (!checked) {
-      const error = document.getElementById('postSurveyError');
-      if (error) error.textContent = 'Please answer every question before continuing.';
-      return;
-    }
-    answers[fieldName] = checked.value;
-  }
-
-  await submitPostStudySurvey({
-    participantId,
-    role: STUDY_MODE,
-    ...answers,
-    submittedAt: new Date().toISOString()
-  });
-
   await submitStudyCompletion({
     participantId,
     role: STUDY_MODE,
@@ -298,7 +235,11 @@ async function handlePostSurveySubmit() {
     completedAt: new Date().toISOString()
   });
 
-  prepareCompletionCard();
+  if (STUDY_MODE === 'general') {
+    window.location.assign(GENERAL_SURVEY_URL);
+    return;
+  }
+
   showCard('doneCard');
 }
 
@@ -312,7 +253,6 @@ function wireEventListeners() {
   bindIfExists('taskStartButton', 'click', handleTaskStart);
   bindIfExists('datasetReviewQuestions', 'click', handleChoiceClick);
   bindIfExists('datasetReviewNextButton', 'click', handleReviewAdvance);
-  bindIfExists('postSurveySubmitButton', 'click', handlePostSurveySubmit);
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
