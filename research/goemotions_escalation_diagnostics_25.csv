@@ -1,0 +1,26 @@
+conversationId,finalSentiment,sentimentScore,highestEscalationRisk,aiHandoffDecision,escalationTurn,escalationTriggers,safetyEscalation,deteriorationEscalation,contextualSignals
+6,Positive,0.9821,0.0283,False,,,False,False,
+24,Neutral,0.7096,0.1048,False,,,False,False,
+80,Positive,0.9347,0.0952,False,,,False,False,
+30,Neutral,0.7096,0.0589,False,,,False,False,
+54,Positive,0.9186,0.1803,False,,,False,False,
+72,Positive,0.9347,0.0285,False,,,False,False,
+76,Positive,0.9186,0.1803,False,,,False,False,
+92,Neutral,0.7096,0.0317,False,,,False,False,
+50,Positive,0.9347,0.0422,False,,,False,False,
+84,Neutral,0.7096,0.6095,True,1,high negative emotion intensity,False,True,
+78,Neutral,0.7096,0.0226,False,,,False,False,
+12,Positive,0.9821,0.0291,False,,,False,False,
+31,Positive,0.9347,0.4207,False,,,False,False,urgency
+18,Positive,0.9347,0.1145,False,,,False,False,urgency
+36,Positive,0.9821,0.4953,False,,,False,False,urgency
+48,Neutral,0.7096,0.0605,False,,,False,False,
+26,Positive,0.9579,0.048,False,,,False,False,
+98,Positive,0.9821,0.0288,False,,,False,False,
+66,Positive,0.9579,0.6881,True,1,high negative emotion intensity,False,True,
+20,Neutral,0.7096,0.6106,True,1,high negative emotion intensity,False,True,urgency
+90,Positive,0.9579,0.0381,False,,,False,False,
+100,Positive,0.9821,0.0272,False,,,False,False,
+45,Positive,0.9347,0.1195,False,,,False,False,
+56,Positive,0.9821,0.0311,False,,,False,False,
+96,Positive,0.9579,0.0381,False,,,False,False,

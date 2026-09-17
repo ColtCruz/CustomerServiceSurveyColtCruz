@@ -9,12 +9,12 @@
     "confusion": 0,
     "escalationRisk": 0.0062,
     "highestEscalationRisk": 0.0283,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -161,7 +161,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -307,11 +310,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.052199999999999996,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -458,7 +461,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.1362,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -605,7 +611,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.6972,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -752,7 +761,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0806,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -899,7 +911,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0014999999999999458,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -913,12 +928,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.1048,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -1065,7 +1080,10 @@
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -1211,11 +1229,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.2598,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -1362,7 +1380,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.08760000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -1509,7 +1530,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3871,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -1656,7 +1680,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.018000000000000016,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -1803,7 +1830,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.271,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -1817,12 +1847,12 @@
     "confusion": 0,
     "escalationRisk": 0.0113,
     "highestEscalationRisk": 0.0952,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -1969,7 +1999,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -2115,11 +2148,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.0269,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -2266,7 +2299,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.1553,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -2413,7 +2449,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.7564,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -2560,7 +2599,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.008199999999999985,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -2707,7 +2749,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.04359999999999997,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -2721,12 +2766,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.0589,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -2873,7 +2918,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -3019,11 +3067,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.9499,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -3170,7 +3218,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.3887,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -3317,7 +3368,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4931,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -3464,7 +3518,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.00039999999999995595,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -3611,7 +3668,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.2714,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -3625,12 +3685,12 @@
     "confusion": 0,
     "escalationRisk": 0.1803,
     "highestEscalationRisk": 0.1803,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -3777,7 +3837,10 @@
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -3923,11 +3986,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.7752000000000001,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -4074,7 +4137,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4984,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -4221,7 +4287,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.40279999999999994,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -4368,7 +4437,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0023000000000000798,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -4515,7 +4587,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.062000000000000055,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -4529,12 +4604,12 @@
     "confusion": 0,
     "escalationRisk": 0.0113,
     "highestEscalationRisk": 0.0285,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -4681,7 +4756,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -4827,11 +4905,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.5871,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -4978,7 +5056,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.6667000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -5125,7 +5206,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.006199999999999983,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -5272,7 +5356,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.0030999999999999917,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -5419,7 +5506,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.04630000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -5433,12 +5523,12 @@
     "confusion": 0,
     "escalationRisk": 0.1803,
     "highestEscalationRisk": 0.1803,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -5585,7 +5675,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -5731,11 +5824,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.011100000000000027,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -5882,7 +5975,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3425,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -6029,7 +6125,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3871,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -6176,7 +6275,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.018000000000000016,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -6323,7 +6425,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.062000000000000055,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -6337,12 +6442,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.0317,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -6489,7 +6594,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -6635,11 +6743,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.10889999999999998,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -6786,7 +6894,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.1553,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -6933,7 +7044,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.7407,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -7080,7 +7194,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.018000000000000016,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -7227,7 +7344,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.271,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -7241,12 +7361,12 @@
     "confusion": 0,
     "escalationRisk": 0.0113,
     "highestEscalationRisk": 0.0422,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -7393,7 +7513,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -7539,11 +7662,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.1196000000000002,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -7690,7 +7813,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.17980000000000002,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -7837,7 +7963,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4931,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -7984,7 +8113,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.01090000000000002,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -8131,7 +8263,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.04630000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -8146,11 +8281,13 @@
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.6095,
     "aiHandoffDecision": true,
-    "escalationTurn": 3,
+    "escalationTurn": 1,
     "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
+      "high negative emotion intensity"
     ],
+    "safetyEscalation": false,
+    "deteriorationEscalation": true,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -8296,8 +8433,15 @@
         },
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "high negative emotion intensity"
+        ],
+        "safetySignals": [],
+        "deteriorationSignals": [
+          "high negative emotion intensity"
+        ],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -8443,11 +8587,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.9392,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -8594,7 +8738,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.022099999999999995,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -8741,7 +8888,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8791,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -8888,7 +9038,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.005300000000000082,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -9035,7 +9188,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.274,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -9049,12 +9205,12 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.0226,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -9201,7 +9357,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -9347,11 +9506,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.2177,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -9498,7 +9657,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.4213,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -9645,7 +9807,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4121,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -9792,7 +9957,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.07789999999999997,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -9939,7 +10107,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.2683,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -9953,12 +10124,12 @@
     "confusion": 0,
     "escalationRisk": 0.0062,
     "highestEscalationRisk": 0.0291,
-    "aiHandoffDecision": true,
-    "escalationTurn": 3,
-    "escalationTriggers": [
-      "customer escalation requested",
-      "policy threshold exceeded"
-    ],
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
+    "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -10105,7 +10276,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -10251,11 +10425,11 @@
         },
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8137,
-        "escalatedOnThisTurn": true,
-        "escalationTriggers": [
-          "customer escalation requested",
-          "policy threshold exceeded"
-        ]
+        "escalatedOnThisTurn": false,
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -10402,7 +10576,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.3993,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -10549,7 +10726,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.07479999999999998,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -10696,7 +10876,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.00880000000000003,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -10843,7 +11026,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.0015000000000000568,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -10860,6 +11046,11 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [
+      "urgency"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -11006,7 +11197,10 @@
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -11153,7 +11347,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8286,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -11300,7 +11497,12 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8070999999999999,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": [
+          "urgency"
+        ]
       },
       {
         "turnNumber": 7,
@@ -11447,7 +11649,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.057699999999999974,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -11594,7 +11799,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.02290000000000003,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -11741,7 +11949,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.04590000000000005,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -11758,6 +11969,11 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [
+      "urgency"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -11904,7 +12120,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -12051,7 +12270,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.1362,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -12198,7 +12420,12 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.6709,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": [
+          "urgency"
+        ]
       },
       {
         "turnNumber": 7,
@@ -12345,7 +12572,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.057699999999999974,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -12492,7 +12722,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.02290000000000003,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -12639,7 +12872,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.04590000000000005,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -12656,6 +12892,11 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [
+      "urgency"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -12802,7 +13043,10 @@
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -12949,7 +13193,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.0558,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -13096,7 +13343,12 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8070999999999999,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": [
+          "urgency"
+        ]
       },
       {
         "turnNumber": 7,
@@ -13243,7 +13495,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0049000000000000155,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -13390,7 +13645,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.02100000000000002,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -13537,7 +13795,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.0015000000000000568,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -13554,6 +13815,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -13700,7 +13964,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -13847,7 +14114,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.7628,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -13994,7 +14264,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.3993,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -14141,7 +14414,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.012199999999999989,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -14288,7 +14564,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.00880000000000003,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -14435,7 +14714,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.274,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -14452,6 +14734,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -14598,7 +14883,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -14745,7 +15033,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.7034,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -14892,7 +15183,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.051400000000000015,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -15039,7 +15333,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8304,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -15186,7 +15483,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.01090000000000002,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -15333,7 +15633,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.02310000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -15350,6 +15653,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -15496,7 +15802,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -15643,7 +15952,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.387,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -15790,7 +16102,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4984,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -15937,7 +16252,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3871,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -16084,7 +16402,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.02100000000000002,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -16231,7 +16552,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.0015000000000000568,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -16245,9 +16569,14 @@
     "confusion": 0,
     "escalationRisk": 0.0381,
     "highestEscalationRisk": 0.6881,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 1,
+    "escalationTriggers": [
+      "high negative emotion intensity"
+    ],
+    "safetyEscalation": false,
+    "deteriorationEscalation": true,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -16393,8 +16722,15 @@
         },
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "high negative emotion intensity"
+        ],
+        "safetySignals": [],
+        "deteriorationSignals": [
+          "high negative emotion intensity"
+        ],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -16541,7 +16877,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.8538000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -16688,7 +17027,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.9082,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -16835,7 +17177,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.012199999999999989,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -16982,7 +17327,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.00880000000000003,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -17129,7 +17477,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.025700000000000056,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -17143,9 +17494,16 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.6106,
-    "aiHandoffDecision": false,
-    "escalationTurn": null,
-    "escalationTriggers": [],
+    "aiHandoffDecision": true,
+    "escalationTurn": 1,
+    "escalationTriggers": [
+      "high negative emotion intensity"
+    ],
+    "safetyEscalation": false,
+    "deteriorationEscalation": true,
+    "contextualSignals": [
+      "urgency"
+    ],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -17291,8 +17649,15 @@
         },
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
-        "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalatedOnThisTurn": true,
+        "escalationTriggers": [
+          "high negative emotion intensity"
+        ],
+        "safetySignals": [],
+        "deteriorationSignals": [
+          "high negative emotion intensity"
+        ],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -17439,7 +17804,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.0974,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -17586,7 +17954,12 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.7358,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": [
+          "urgency"
+        ]
       },
       {
         "turnNumber": 7,
@@ -17733,7 +18106,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.057699999999999974,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -17880,7 +18256,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.020199999999999996,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -18027,7 +18406,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.2683,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -18044,6 +18426,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -18190,7 +18575,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -18337,7 +18725,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.5871,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -18484,7 +18875,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.9082,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -18631,7 +19025,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.07479999999999998,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -18778,7 +19175,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0030999999999999917,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -18925,7 +19325,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.020000000000000018,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -18942,6 +19345,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -19088,7 +19494,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -19235,7 +19644,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3199,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -19382,7 +19794,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4249,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -19529,7 +19944,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3245,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -19676,7 +20094,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.07789999999999997,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -19823,7 +20244,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0041999999999999815,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -19840,6 +20264,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -19986,7 +20413,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -20133,7 +20563,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.8633,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -20280,7 +20713,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.4984,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -20427,7 +20863,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.40279999999999994,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -20574,7 +21013,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.008199999999999985,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -20721,7 +21163,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.04359999999999997,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -20738,6 +21183,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -20884,7 +21332,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -21031,7 +21482,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.1339,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -21178,7 +21632,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3536,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -21325,7 +21782,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.3245,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -21472,7 +21932,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.07789999999999997,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -21619,7 +22082,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0041999999999999815,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   },
@@ -21636,6 +22102,9 @@
     "aiHandoffDecision": false,
     "escalationTurn": null,
     "escalationTriggers": [],
+    "safetyEscalation": false,
+    "deteriorationEscalation": false,
+    "contextualSignals": [],
     "customerTurnAnalysis": [
       {
         "turnNumber": 1,
@@ -21782,7 +22251,10 @@
         "consecutiveNegativeTurns": 1,
         "sentimentDrop": 0,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 3,
@@ -21929,7 +22401,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 1.5908,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 5,
@@ -22076,7 +22551,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.6667000000000001,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 7,
@@ -22223,7 +22701,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0034999999999999476,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 9,
@@ -22370,7 +22851,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": 0.0023000000000000798,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       },
       {
         "turnNumber": 11,
@@ -22517,7 +23001,10 @@
         "consecutiveNegativeTurns": 0,
         "sentimentDrop": -0.022700000000000053,
         "escalatedOnThisTurn": false,
-        "escalationTriggers": []
+        "escalationTriggers": [],
+        "safetySignals": [],
+        "deteriorationSignals": [],
+        "contextualSignals": []
       }
     ]
   }

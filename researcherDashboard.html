@@ -920,6 +920,16 @@
       const selectedPanel = renderEmotionBreakdown(selectedAnalysis);
       const chart = renderSentimentChart(turnList, escalationTurn);
 
+      const safetyTags = Array.isArray(selectedAnalysis?.safetySignals) && selectedAnalysis.safetySignals.length
+        ? selectedAnalysis.safetySignals.map((trigger) => `<span class="trigger">${escapeHtml(trigger)}</span>`).join('')
+        : '<span class="trigger">None</span>';
+      const deteriorationTags = Array.isArray(selectedAnalysis?.deteriorationSignals) && selectedAnalysis.deteriorationSignals.length
+        ? selectedAnalysis.deteriorationSignals.map((trigger) => `<span class="trigger">${escapeHtml(trigger)}</span>`).join('')
+        : '<span class="trigger">None</span>';
+      const contextualTags = Array.isArray(selectedAnalysis?.contextualSignals) && selectedAnalysis.contextualSignals.length
+        ? selectedAnalysis.contextualSignals.map((trigger) => `<span class="trigger">${escapeHtml(trigger)}</span>`).join('')
+        : '<span class="trigger">None</span>';
+
       const selectedTurnInfo = selectedAnalysis ? `
         <div class="analysis-panel">
           <h3>AI Escalation Marker</h3>
@@ -931,9 +941,9 @@
           </div>
           <div class="turn-text" style="margin-top:12px;">${escapeHtml(selectedAnalysis.customerMessage || '')}</div>
           <div class="trigger-list" style="margin-top:12px;">
-            ${selectedAnalysis.escalationTriggers && selectedAnalysis.escalationTriggers.length
-              ? selectedAnalysis.escalationTriggers.map((trigger) => `<span class="trigger">${escapeHtml(trigger)}</span>`).join('')
-              : '<span class="trigger">No escalation rule triggered</span>'}
+            <div style="margin-bottom:10px;"><strong>Safety / high-risk</strong><br>${safetyTags}</div>
+            <div style="margin-bottom:10px;"><strong>Conversation deterioration</strong><br>${deteriorationTags}</div>
+            <div><strong>Contextual signals</strong><br>${contextualTags}</div>
           </div>
         </div>
       ` : '<div class="analysis-panel"><h3>AI Escalation Marker</h3><div class="empty-state">This conversation has no customer-turn AI results.</div></div>';

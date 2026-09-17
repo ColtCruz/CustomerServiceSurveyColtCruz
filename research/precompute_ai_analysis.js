@@ -75,17 +75,30 @@ async function buildConversationAiAnalysis(context, conversation) {
       sentimentLabels.concat(result.sentiment)
     );
 
-    const reasons = [];
-    if (result.escalationRisk >= 0.8) reasons.push('escalation risk >= 0.80');
-    if (result.anger >= 0.85) reasons.push('anger >= 0.85');
-    if (trend.consecutiveNegativeTurns >= 3) reasons.push('consecutive negative turns >= 3');
-    if (trend.sentimentDrop <= -0.5) reasons.push('sentiment drop <= -0.50');
-    if (result.requestsHuman) reasons.push('direct request for human');
-    if (result.mentionsChargeback) reasons.push('chargeback language');
-    if (result.securityRisk) reasons.push('security risk');
-    if (result.legalThreat) reasons.push('legal threat');
+    const safetySignals = [];
+    if (result.securityRisk) safetySignals.push('security risk');
+    if (result.legalThreat) safetySignals.push('legal threat');
+
+    const contextualSignals = [];
+    if (result.requestsHuman) contextualSignals.push('human request');
+    if (result.mentionsChargeback) contextualSignals.push('chargeback / business policy');
+    if ((result.urgency || 0) >= 0.5) contextualSignals.push('urgency');
+    if ((result.confusion || 0) >= 0.5) contextualSignals.push('confusion');
+
+    const negativeIntensity = Number(result.mappedEmotionScores?.negativeIntensity ?? 0);
+    const deteriorationSignals = [];
+    if (Math.max(Number(result.anger || 0), Number(result.frustration || 0), negativeIntensity) >= 0.75) {
+      deteriorationSignals.push('high negative emotion intensity');
+    }
+    if ((trend.consecutiveNegativeTurns || 0) >= 2 && negativeIntensity >= 0.55) {
+      deteriorationSignals.push('sustained deterioration across turns');
+    }
+    if ((trend.sentimentDrop || 0) <= -0.35 && negativeIntensity >= 0.45) {
+      deteriorationSignals.push('worsening sentiment trend');
+    }
 
     const escalatedOnThisTurn = context.shouldEscalate(result, trend);
+    const reasons = [...safetySignals, ...deteriorationSignals];
 
     const turnAnalysis = {
       turnNumber: turn.turnNumber,
@@ -107,7 +120,10 @@ async function buildConversationAiAnalysis(context, conversation) {
       consecutiveNegativeTurns: trend.consecutiveNegativeTurns,
       sentimentDrop: Number(trend.sentimentDrop || 0),
       escalatedOnThisTurn,
-      escalationTriggers: reasons
+      escalationTriggers: reasons,
+      safetySignals,
+      deteriorationSignals,
+      contextualSignals
     };
 
     highestEscalationRisk = Math.max(highestEscalationRisk, turnAnalysis.escalationRisk);
@@ -128,6 +144,10 @@ async function buildConversationAiAnalysis(context, conversation) {
     urgency: 0, confusion: 0, escalationRisk: 0, rawGoEmotions: [], mappedEmotionScores: {}
   };
 
+  const safetyEscalation = customerTurnAnalysis.some((turn) => (turn.safetySignals || []).length > 0);
+  const deteriorationEscalation = customerTurnAnalysis.some((turn) => (turn.deteriorationSignals || []).length > 0);
+  const contextualSignals = Array.from(new Set(customerTurnAnalysis.flatMap((turn) => turn.contextualSignals || [])));
+
   return {
     conversationId: conversation.conversationId,
     finalSentiment: finalTurn.sentimentLabel,
@@ -138,9 +158,12 @@ async function buildConversationAiAnalysis(context, conversation) {
     confusion: Number(finalTurn.confusion || 0),
     escalationRisk: Number(finalTurn.escalationRisk || 0),
     highestEscalationRisk,
-    aiHandoffDecision: customerTurnAnalysis.some((turn) => turn.escalatedOnThisTurn) || escalationTurn !== null,
+    aiHandoffDecision: safetyEscalation || deteriorationEscalation || escalationTurn !== null,
     escalationTurn,
     escalationTriggers,
+    safetyEscalation,
+    deteriorationEscalation,
+    contextualSignals,
     customerTurnAnalysis
   };
 }

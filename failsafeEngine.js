@@ -54,17 +54,48 @@ function computeConversationTrend(state) {
 // account, or a firm cancellation/chargeback request) - those checks
 // are independent of the sentiment-derived signals.
 
-function shouldEscalate(result, conversationTrend) {
-  return (
-    result.escalationRisk >= 0.8 ||
-    result.anger >= 0.85 ||
-    conversationTrend.consecutiveNegativeTurns >= 3 ||
-    conversationTrend.sentimentDrop <= -0.5 ||
-    result.requestsHuman === true ||
-    result.mentionsChargeback === true ||
-    result.securityRisk === true ||
-    result.legalThreat === true
+function buildEscalationSignalBreakdown(result, conversationTrend) {
+  const safetySignals = [];
+  if (result.securityRisk === true) safetySignals.push('security risk');
+  if (result.legalThreat === true) safetySignals.push('legal threat');
+
+  const contextualSignals = [];
+  if (result.requestsHuman === true) contextualSignals.push('human request');
+  if (result.mentionsChargeback === true) contextualSignals.push('chargeback / business policy');
+  if ((result.urgency || 0) >= 0.5) contextualSignals.push('urgency');
+  if ((result.confusion || 0) >= 0.5) contextualSignals.push('confusion');
+
+  const negativeIntensity = Number(result.mappedEmotionScores?.negativeIntensity ?? 0);
+  const peakNegative = Math.max(
+    Number(result.anger || 0),
+    Number(result.frustration || 0),
+    Number(result.mappedEmotionScores?.fear || 0),
+    Number(result.mappedEmotionScores?.sadness || 0),
+    Number(result.mappedEmotionScores?.disgust || 0),
+    negativeIntensity
   );
+
+  const deteriorationSignals = [];
+  if (peakNegative >= 0.75) deteriorationSignals.push('high negative emotion intensity');
+  if ((conversationTrend.consecutiveNegativeTurns || 0) >= 2 && negativeIntensity >= 0.55) {
+    deteriorationSignals.push('sustained deterioration across turns');
+  }
+  if ((conversationTrend.sentimentDrop || 0) <= -0.35 && negativeIntensity >= 0.45) {
+    deteriorationSignals.push('worsening sentiment trend');
+  }
+
+  return {
+    safetySignals,
+    contextualSignals,
+    deteriorationSignals,
+    safetyEscalation: safetySignals.length > 0,
+    deteriorationEscalation: deteriorationSignals.length > 0
+  };
+}
+
+function shouldEscalate(result, conversationTrend) {
+  const breakdown = buildEscalationSignalBreakdown(result, conversationTrend);
+  return breakdown.safetyEscalation || breakdown.deteriorationEscalation;
 }
 
 // ───────── Reply generation ─────────

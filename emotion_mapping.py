@@ -62,8 +62,9 @@ CHARGEBACK_PHRASES = [
 ]
 SECURITY_PHRASES = [
     "account has been compromised", "account was compromised", "my account is compromised",
-    "account was hacked", "my account was hacked", "unauthorized access",
-    "someone accessed my account", "someone logged into my account",
+    "security compromise", "account takeover", "account was hacked", "my account was hacked",
+    "someone hacked my account", "unauthorized access", "someone accessed my account",
+    "someone logged into my account",
 ]
 LEGAL_PHRASES = [
     "lawsuit", "legal action", "sue you", "my lawyer", "my attorney",
@@ -182,6 +183,13 @@ def build_emotion_profile(go_emotions_raw: Any, text: str) -> Dict[str, Any]:
     turn. Returns exactly the object shape the study app expects from
     POST /analyze-emotion (see emotion_api.py) and that
     buildConversationModelAnalysis() in app.js consumes per customer turn.
+
+    The escalation architecture is deliberately split into three categories:
+      A. Safety / high-risk escalation (securityRisk, legalThreat)
+      B. GoEmotions-driven deterioration (anger, frustration, sadness, fear,
+         disgust, negativeIntensity, worsening trend)
+      C. Contextual signals that do not independently trigger a handoff
+         (requestsHuman, urgency, confusion, chargeback / business policy)
     """
     normalized = normalize_go_emotions(go_emotions_raw)
     prob_map = {item["label"]: item["score"] for item in normalized}
@@ -211,18 +219,37 @@ def build_emotion_profile(go_emotions_raw: Any, text: str) -> Dict[str, Any]:
     chargeback = phrase_exists(text, CHARGEBACK_PHRASES)
     security_risk = phrase_exists(text, SECURITY_PHRASES)
     legal_threat = phrase_exists(text, LEGAL_PHRASES)
+    urgency = urgency_score(text)
+    confusion = confusion_score(text)
 
-    risk = max(
-        0.0,
-        min(1.0, mapped["anger"] * 0.5 + mapped["frustration"] * 0.3 + urgency_score(text) * 0.2)
-    )
-    if direct_human_request:
-        risk = max(risk, 0.9)
-    if chargeback:
-        risk = max(risk, 0.85)
+    safety_signals = []
     if security_risk:
-        risk = max(risk, 0.95)
+        safety_signals.append("securityRisk")
     if legal_threat:
+        safety_signals.append("legalThreat")
+
+    contextual_signals = []
+    if direct_human_request:
+        contextual_signals.append("requestsHuman")
+    if chargeback:
+        contextual_signals.append("chargeback")
+    if urgency >= 0.5:
+        contextual_signals.append("urgency")
+    if confusion >= 0.5:
+        contextual_signals.append("confusion")
+
+    deterioration_signals = []
+    if max(mapped["anger"], mapped["frustration"], mapped["sadness"], mapped["fear"], mapped["disgust"], negative_intensity) >= 0.75:
+        deterioration_signals.append("high negative emotion intensity")
+
+    risk = min(
+        1.0,
+        max(
+            0.0,
+            mapped["anger"] * 0.35 + mapped["frustration"] * 0.25 + negative_intensity * 0.35 + urgency * 0.1
+        )
+    )
+    if security_risk or legal_threat:
         risk = max(risk, 0.95)
 
     return {
@@ -230,8 +257,8 @@ def build_emotion_profile(go_emotions_raw: Any, text: str) -> Dict[str, Any]:
         "sentimentScore": round(float(sentiment_score), 4),
         "frustration": round(float(mapped["frustration"]), 4),
         "anger": round(float(mapped["anger"]), 4),
-        "urgency": urgency_score(text),
-        "confusion": confusion_score(text),
+        "urgency": urgency,
+        "confusion": confusion,
         "escalationRisk": round(float(risk), 4),
         "requestsHuman": direct_human_request,
         "mentionsChargeback": chargeback,
@@ -239,4 +266,9 @@ def build_emotion_profile(go_emotions_raw: Any, text: str) -> Dict[str, Any]:
         "legalThreat": legal_threat,
         "rawGoEmotions": normalized,
         "mappedEmotionScores": {k: round(float(v), 4) for k, v in mapped.items()},
+        "safetyEscalation": bool(safety_signals),
+        "deteriorationEscalation": bool(deterioration_signals),
+        "safetySignals": safety_signals,
+        "deteriorationSignals": deterioration_signals,
+        "contextualSignals": contextual_signals,
     }

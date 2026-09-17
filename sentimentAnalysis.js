@@ -257,8 +257,9 @@ const CHARGEBACK_PHRASES = [
 
 const SECURITY_PHRASES = [
   'account has been compromised', 'account was compromised', 'my account is compromised',
-  'account was hacked', 'my account was hacked', 'unauthorized access',
-  'someone accessed my account', 'someone logged into my account'
+  'security compromise', 'account takeover', 'account was hacked', 'my account was hacked',
+  'someone hacked my account', 'unauthorized access', 'someone accessed my account',
+  'someone logged into my account'
 ];
 
 const LEGAL_PHRASES = [

@@ -1,0 +1,359 @@
+{
+  "generatedFrom": "c:\\Masters HCI\\CustomerServiceSurveyColtCruz\\research\\ai_analysis_25.json",
+  "summary": {
+    "totalConversations": 25,
+    "escalatedConversations": 3,
+    "nonEscalatedConversations": 22,
+    "safetyEscalationCount": 0,
+    "deteriorationEscalationCount": 3,
+    "contextualOnlyEscalations": 0,
+    "humanRequestOnlyNoEscalateCount": 0,
+    "principles": {
+      "requestHumanAloneDoesNotEscalate": true,
+      "safetyAndDeteriorationAreDistinct": true,
+      "contextualSignalsDoNotTriggerEscalation": true
+    },
+    "note": "This run preserves the current provisional escalation thresholds and dataset without tuning or modifying either."
+  },
+  "conversations": [
+    {
+      "conversationId": "6",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9821,
+      "highestEscalationRisk": 0.0283,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "24",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.1048,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "80",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9347,
+      "highestEscalationRisk": 0.0952,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "30",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.0589,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "54",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9186,
+      "highestEscalationRisk": 0.1803,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "72",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9347,
+      "highestEscalationRisk": 0.0285,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "76",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9186,
+      "highestEscalationRisk": 0.1803,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "92",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.0317,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "50",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9347,
+      "highestEscalationRisk": 0.0422,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "84",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.6095,
+      "aiHandoffDecision": true,
+      "escalationTurn": 1,
+      "escalationTriggers": [
+        "high negative emotion intensity"
+      ],
+      "safetyEscalation": false,
+      "deteriorationEscalation": true,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "78",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.0226,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "12",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9821,
+      "highestEscalationRisk": 0.0291,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "31",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9347,
+      "highestEscalationRisk": 0.4207,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [
+        "urgency"
+      ],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "18",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9347,
+      "highestEscalationRisk": 0.1145,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [
+        "urgency"
+      ],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "36",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9821,
+      "highestEscalationRisk": 0.4953,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [
+        "urgency"
+      ],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "48",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.0605,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "26",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9579,
+      "highestEscalationRisk": 0.048,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "98",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9821,
+      "highestEscalationRisk": 0.0288,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "66",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9579,
+      "highestEscalationRisk": 0.6881,
+      "aiHandoffDecision": true,
+      "escalationTurn": 1,
+      "escalationTriggers": [
+        "high negative emotion intensity"
+      ],
+      "safetyEscalation": false,
+      "deteriorationEscalation": true,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "20",
+      "finalSentiment": "Neutral",
+      "sentimentScore": 0.7096,
+      "highestEscalationRisk": 0.6106,
+      "aiHandoffDecision": true,
+      "escalationTurn": 1,
+      "escalationTriggers": [
+        "high negative emotion intensity"
+      ],
+      "safetyEscalation": false,
+      "deteriorationEscalation": true,
+      "contextualSignals": [
+        "urgency"
+      ],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "90",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9579,
+      "highestEscalationRisk": 0.0381,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "100",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9821,
+      "highestEscalationRisk": 0.0272,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "45",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9347,
+      "highestEscalationRisk": 0.1195,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "56",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9821,
+      "highestEscalationRisk": 0.0311,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    },
+    {
+      "conversationId": "96",
+      "finalSentiment": "Positive",
+      "sentimentScore": 0.9579,
+      "highestEscalationRisk": 0.0381,
+      "aiHandoffDecision": false,
+      "escalationTurn": null,
+      "escalationTriggers": [],
+      "safetyEscalation": false,
+      "deteriorationEscalation": false,
+      "contextualSignals": [],
+      "humanRequest": false
+    }
+  ]
+}
