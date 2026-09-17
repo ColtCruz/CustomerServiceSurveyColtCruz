@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Benchmark Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f8fb;
+      color: #1f2937;
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1, h2, h3 { margin-top: 0; }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .stat-label {
+      display: block;
+      color: #6b7280;
+      font-size: 12px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .stat-value {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .case {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background: #fff;
+    }
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .pill.red { background: #fee2e2; color: #991b1b; }
+    .pill.green { background: #dcfce7; color: #166534; }
+    .pill.gray { background: #f3f4f6; color: #374151; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      text-align: left;
+      vertical-align: top;
+      padding: 8px 10px;
+    }
+    th {
+      background: #f9fafb;
+      color: #6b7280;
+    }
+    .turns {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .turn {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fafafa;
+    }
+    .muted {
+      color: #6b7280;
+      font-size: 12px;
+    }
+    .empty-state {
+      padding: 20px;
+      text-align: center;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <h1>External Research Benchmark Dashboard</h1>
+      <p class="muted">
+        The benchmark uses the Hugging Face emotional model for research comparison only and does not replace the production handoff classifier.
+      </p>
+      <div id="summary" class="summary-grid"></div>
+    </div>
+    <div id="cases"></div>
+  </div>
+
+  <script>
+    async function loadResults() {
+      const response = await fetch('./research_results.json');
+      if (!response.ok) throw new Error('research_results.json not found');
+      return response.json();
+    }
+
+    function pill(label, variant) {
+      return `<span class="pill ${variant || 'gray'}">${label}</span>`;
+    }
+
+    function renderSummary(data) {
+      const total = data.totalCases || 0;
+      const escalated = data.cases.filter((item) => item.agentEscalationDecision).length;
+      const matched = data.cases.filter((item) => item.sentimentClassificationsMatched).length;
+      const summary = document.getElementById('summary');
+      summary.innerHTML = `
+        <div class="stat"><span class="stat-label">Cases</span><div class="stat-value">${total}</div></div>
+        <div class="stat"><span class="stat-label">Agent escalations</span><div class="stat-value">${escalated}</div></div>
+        <div class="stat"><span class="stat-label">Sentiment matches</span><div class="stat-value">${matched}</div></div>
+        <div class="stat"><span class="stat-label">Model</span><div class="stat-value">HF GoEmotions</div></div>
+      `;
+    }
+
+    function renderTurns(turns) {
+      return turns.map((turn) => `
+        <div class="turn">
+          <div><strong>Turn ${turn.turn}</strong></div>
+          <div class="muted">Customer:</div>
+          <div>${turn.customerMessage}</div>
+          <div class="muted" style="margin-top:8px;">HF emotion: ${turn.hfTopEmotion} (${turn.hfSentimentBucket})</div>
+          <div class="muted">Agent sentiment: ${turn.agentSentiment} (${turn.agentSentimentScore.toFixed(2)})</div>
+          <div class="muted">Escalation risk: ${turn.agentEscalationRisk.toFixed(2)} | Escalated: ${turn.agentEscalated ? 'Yes' : 'No'}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderCase(item) {
+      return `
+        <div class="case">
+          <div class="case-header">
+            <div>
+              <h3>Conversation ${item.conversationId}</h3>
+              <div class="muted">Issue: ${item.issueType} | Product: ${item.product} | Status: ${item.datasetStatus}</div>
+            </div>
+            <div>
+              ${item.agentEscalationDecision ? pill('Escalated', 'red') : pill('Not escalated', 'green')}
+              ${item.sentimentClassificationsMatched ? pill('Sentiment match', 'green') : pill('Sentiment mismatch', 'red')}
+            </div>
+          </div>
+
+          <table>
+            <tr>
+              <th>Dataset sentiment</th>
+              <td>${item.datasetSentiment}</td>
+              <th>Agent sentiment</th>
+              <td>${item.agentSentimentClassification}</td>
+            </tr>
+            <tr>
+              <th>Dataset priority</th>
+              <td>${item.datasetPriority}</td>
+              <th>Dataset status</th>
+              <td>${item.datasetStatus}</td>
+            </tr>
+            <tr>
+              <th>Agent escalation</th>
+              <td>${item.agentEscalationDecision ? 'Yes' : 'No'}</td>
+              <th>Escalation turn</th>
+              <td>${item.escalationTurn ?? 'N/A'}</td>
+            </tr>
+            <tr>
+              <th>HF top emotion</th>
+              <td>${item.hfTopEmotion}</td>
+              <th>HF sentiment bucket</th>
+              <td>${item.hfSentimentBucket}</td>
+            </tr>
+          </table>
+
+          <div class="turns">
+            ${renderTurns(item.turns)}
+          </div>
+        </div>
+      `;
+    }
+
+    async function initialize() {
+      try {
+        const data = await loadResults();
+        renderSummary(data);
+        const casesRoot = document.getElementById('cases');
+        if (!data.cases || data.cases.length === 0) {
+          casesRoot.innerHTML = '<div class="empty-state">No benchmark cases found.</div>';
+          return;
+        }
+        casesRoot.innerHTML = data.cases.map(renderCase).join('');
+      } catch (error) {
+        document.getElementById('cases').innerHTML = `<div class="empty-state">${error.message}</div>`;
+      }
+    }
+
+    initialize();
+  </script>
+</body>
+</html>

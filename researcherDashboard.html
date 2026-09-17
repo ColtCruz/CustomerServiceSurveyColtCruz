@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Researcher Dashboard</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; background: #f7f8fb; color: #1f2937; }
+  .page { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  h1, h2, h3 { margin-top: 0; }
+  .card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 18px; margin-bottom: 16px; }
+  .muted { color: #6b7280; font-size: 13px; }
+  .notice { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; border-radius: 10px; padding: 12px 14px; font-size: 13px; margin-bottom: 16px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 8px; }
+  .stat { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; }
+  .stat-label { display: block; color: #6b7280; font-size: 12px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat-value { font-size: 22px; font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { border: 1px solid #e5e7eb; text-align: left; vertical-align: top; padding: 8px 10px; }
+  th { background: #f9fafb; color: #6b7280; position: sticky; top: 0; }
+  .table-wrap { overflow-x: auto; }
+  .pill { display: inline-block; padding: 4px 9px; border-radius: 999px; font-size: 11px; font-weight: bold; }
+  .pill.yes { background: #fee2e2; color: #991b1b; }
+  .pill.no { background: #dbeafe; color: #1d4ed8; }
+  .pill.na { background: #f3f4f6; color: #6b7280; }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  button { padding: 9px 14px; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; cursor: pointer; font-size: 13px; }
+  button.danger { color: #991b1b; border-color: #fecaca; }
+  .empty-state { padding: 20px; text-align: center; color: #6b7280; }
+  .reason-item { border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; background: #fafafa; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <h1>Researcher Dashboard</h1>
+    <div class="notice">
+      Researcher-only view. Reads response/qualification data saved in <em>this browser's</em> localStorage
+      (not shared across devices - once a cloud database is wired up in dataSubmission.js, this should read
+      from there instead). Never linked from the participant-facing study.
+    </div>
+    <div id="summary" class="summary-grid"></div>
+    <div class="controls">
+      <button id="exportResponsesButton">Export responses (JSON)</button>
+      <button id="exportQualificationsButton">Export qualifications (JSON)</button>
+      <button id="refreshButton">Refresh</button>
+      <button id="clearButton" class="danger">Clear all stored data</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Completion status</h2>
+    <p class="muted">"Started" = has at least one conversation response. "Completed" = has a study_completions record (post-study survey submitted).</p>
+    <div id="completionTable" class="table-wrap"></div>
+  </div>
+
+  <div class="card">
+    <h2>Per-conversation comparison</h2>
+    <p class="muted">AI decision comes from research/ai_analysis_25.json (precomputed offline). Handoff rate = share of responses in that role choosing "Yes - Transfer to Human".</p>
+    <div id="conversationTable" class="table-wrap"></div>
+  </div>
+
+  <div class="card">
+    <h2>Professional reviewer qualifications</h2>
+    <div id="qualificationsTable" class="table-wrap"></div>
+  </div>
+
+  <div class="card">
+    <h2>Post-study survey answers</h2>
+    <div id="postSurveyTable" class="table-wrap"></div>
+  </div>
+
+  <div class="card">
+    <h2>Written explanations</h2>
+    <p class="muted">Every optional reason a respondent entered, for qualitative reading.</p>
+    <div id="reasonsList"></div>
+  </div>
+</div>
+
+<script src="dataSubmission.js"></script>
+<script>
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function pill(decision) {
+    if (decision === true) return '<span class="pill yes">Yes</span>';
+    if (decision === false) return '<span class="pill no">No</span>';
+    return '<span class="pill na">-</span>';
+  }
+
+  async function fetchJsonSafe(path) {
+    try {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) return null;
+      return await response.json();
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function downloadJson(filename, data) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function renderSummary(responses, qualifications, completions) {
+    const generalResponses = responses.filter((r) => r.role === 'general');
+    const professionalResponses = responses.filter((r) => r.role === 'professional');
+    const uniqueParticipants = (list) => new Set(list.map((r) => r.participantId)).size;
+
+    document.getElementById('summary').innerHTML = `
+      <div class="stat"><span class="stat-label">Total responses</span><div class="stat-value">${responses.length}</div></div>
+      <div class="stat"><span class="stat-label">General participants</span><div class="stat-value">${uniqueParticipants(generalResponses)}</div></div>
+      <div class="stat"><span class="stat-label">Professional reviewers</span><div class="stat-value">${uniqueParticipants(professionalResponses)}</div></div>
+      <div class="stat"><span class="stat-label">Qualification records</span><div class="stat-value">${qualifications.length}</div></div>
+      <div class="stat"><span class="stat-label">Completed studies</span><div class="stat-value">${completions.filter((c) => c.completed).length}</div></div>
+    `;
+  }
+
+  function renderCompletionStatus(responses, completions) {
+    const roles = ['general', 'professional'];
+    const rows = roles.map((role) => {
+      const started = new Set(responses.filter((r) => r.role === role).map((r) => r.participantId));
+      const completed = new Set(completions.filter((c) => c.role === role && c.completed).map((c) => c.participantId));
+      return `
+        <tr>
+          <td>${role}</td>
+          <td>${started.size}</td>
+          <td>${completed.size}</td>
+          <td>${started.size ? Math.round((completed.size / started.size) * 100) + '%' : 'n/a'}</td>
+        </tr>
+      `;
+    }).join('');
+
+    document.getElementById('completionTable').innerHTML = `
+      <table>
+        <thead><tr><th>Role</th><th>Started</th><th>Completed</th><th>Completion rate</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderPostSurvey(postSurveys) {
+    if (!postSurveys.length) {
+      document.getElementById('postSurveyTable').innerHTML = '<div class="empty-state">No post-study survey responses recorded yet.</div>';
+      return;
+    }
+    const rows = postSurveys.map((s) => `
+      <tr>
+        <td>${escapeHtml(s.participantId)}</td>
+        <td>${escapeHtml(s.role)}</td>
+        <td>${escapeHtml(s.contactFrequencyPast3Years)}</td>
+        <td>${escapeHtml(s.firstContactResolutionFrequency)}</td>
+        <td>${escapeHtml(s.transferredBeforeResolutionFrequency)}</td>
+        <td>${escapeHtml(s.representativeCountBeforeResolution)}</td>
+        <td>${escapeHtml(s.overallSatisfaction)}</td>
+        <td>${escapeHtml(s.automatedSystemUsageFrequency)}</td>
+      </tr>
+    `).join('');
+    document.getElementById('postSurveyTable').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Participant ID</th><th>Role</th><th>Contact frequency (3yr)</th><th>First-contact resolution</th>
+          <th>Transferred before resolution</th><th>Rep count before resolution</th><th>Overall satisfaction</th><th>Automated system usage</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function decisionsFor(responses, role, conversationId) {
+    return responses.filter((r) => r.role === role && r.conversationId === conversationId).map((r) => Boolean(r.handoffDecision));
+  }
+
+  function handoffRateLabel(decisions) {
+    if (!decisions.length) return '<span class="muted">no responses</span>';
+    const yesCount = decisions.filter(Boolean).length;
+    return `${yesCount}/${decisions.length} Yes (${Math.round((yesCount / decisions.length) * 100)}%)`;
+  }
+
+  function agreementRate(pairs) {
+    if (!pairs.length) return null;
+    const agree = pairs.filter(([a, b]) => a === b).length;
+    return Math.round((agree / pairs.length) * 100);
+  }
+
+  function renderConversationTable(responses, aiRecords, conversationMeta) {
+    const aiByConv = new Map(aiRecords.map((r) => [String(r.conversationId), Boolean(r.aiHandoffDecision)]));
+    const conversationIds = conversationMeta.length
+      ? conversationMeta.map((c) => c.conversationId)
+      : [...new Set(responses.map((r) => r.conversationId))];
+
+    const participantVsAiPairs = [];
+    const professionalVsAiPairs = [];
+
+    const rows = conversationIds.map((conversationId) => {
+      const meta = conversationMeta.find((c) => c.conversationId === conversationId) || {};
+      const aiDecision = aiByConv.has(conversationId) ? aiByConv.get(conversationId) : null;
+      const generalDecisions = decisionsFor(responses, 'general', conversationId);
+      const professionalDecisions = decisionsFor(responses, 'professional', conversationId);
+
+      if (aiDecision !== null) {
+        generalDecisions.forEach((d) => participantVsAiPairs.push([d, aiDecision]));
+        professionalDecisions.forEach((d) => professionalVsAiPairs.push([d, aiDecision]));
+      }
+
+      return `
+        <tr>
+          <td>${escapeHtml(conversationId)}</td>
+          <td>${escapeHtml(meta.issueType || '')}</td>
+          <td>${pill(aiDecision)}</td>
+          <td>${handoffRateLabel(generalDecisions)}</td>
+          <td>${handoffRateLabel(professionalDecisions)}</td>
+        </tr>
+      `;
+    }).join('');
+
+    const participantAgreement = agreementRate(participantVsAiPairs);
+    const professionalAgreement = agreementRate(professionalVsAiPairs);
+
+    document.getElementById('conversationTable').innerHTML = `
+      <p class="muted">
+        Participant-vs-AI agreement: <strong>${participantAgreement === null ? 'n/a' : participantAgreement + '%'}</strong>
+        &nbsp;|&nbsp; Professional-vs-AI agreement: <strong>${professionalAgreement === null ? 'n/a' : professionalAgreement + '%'}</strong>
+      </p>
+      <table>
+        <thead><tr><th>Conversation</th><th>Issue type</th><th>AI decision</th><th>General handoff rate</th><th>Professional handoff rate</th></tr></thead>
+        <tbody>${rows || '<tr><td colspan="5" class="empty-state">No conversations found.</td></tr>'}</tbody>
+      </table>
+    `;
+  }
+
+  function renderQualifications(qualifications) {
+    if (!qualifications.length) {
+      document.getElementById('qualificationsTable').innerHTML = '<div class="empty-state">No professional reviewer qualifications recorded yet.</div>';
+      return;
+    }
+    const rows = qualifications.map((q) => `
+      <tr>
+        <td>${escapeHtml(q.participantId)}</td>
+        <td>${escapeHtml(q.jobTitle)}</td>
+        <td>${escapeHtml(q.yearsExperience)}</td>
+        <td>${escapeHtml(q.industry)}</td>
+        <td>${q.hasMadeHandoffDecisions ? 'Yes' : 'No'}</td>
+        <td>${escapeHtml(q.submittedAt)}</td>
+      </tr>
+    `).join('');
+    document.getElementById('qualificationsTable').innerHTML = `
+      <table>
+        <thead><tr><th>Participant ID</th><th>Job title</th><th>Years experience</th><th>Industry</th><th>Made handoff decisions?</th><th>Submitted at</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderReasons(responses) {
+    const withReasons = responses.filter((r) => r.optionalReason && r.optionalReason.trim());
+    if (!withReasons.length) {
+      document.getElementById('reasonsList').innerHTML = '<div class="empty-state">No written explanations recorded yet.</div>';
+      return;
+    }
+    document.getElementById('reasonsList').innerHTML = withReasons.map((r) => `
+      <div class="reason-item">
+        <div class="muted">${escapeHtml(r.participantId)} (${escapeHtml(r.role)}) - conversation ${escapeHtml(r.conversationId)} - decision: ${r.handoffDecision ? 'Transfer to human' : 'Continue automated'}</div>
+        <div>${escapeHtml(r.optionalReason)}</div>
+      </div>
+    `).join('');
+  }
+
+  async function loadAll() {
+    const [responses, qualifications, postSurveys, completions] = await Promise.all([
+      loadStoredCollection(RESPONSES_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.responsesTable),
+      loadStoredCollection(QUALIFICATIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.qualificationsTable),
+      loadStoredCollection(POST_SURVEY_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.postSurveyTable),
+      loadStoredCollection(COMPLETIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.completionTable)
+    ]);
+    return { responses, qualifications, postSurveys, completions };
+  }
+
+  async function render() {
+    const { responses, qualifications, postSurveys, completions } = await loadAll();
+    const aiRecords = (await fetchJsonSafe('research/ai_analysis_25.json')) || [];
+    const conversationMeta = (await fetchJsonSafe('research/study_conversations.json')) || [];
+
+    renderSummary(responses, qualifications, completions);
+    renderCompletionStatus(responses, completions);
+    renderConversationTable(responses, aiRecords, conversationMeta);
+    renderQualifications(qualifications);
+    renderPostSurvey(postSurveys);
+    renderReasons(responses);
+  }
+
+  document.getElementById('exportResponsesButton').addEventListener('click', async () => {
+    downloadJson('study_responses.json', await loadStoredCollection(RESPONSES_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.responsesTable));
+  });
+  document.getElementById('exportQualificationsButton').addEventListener('click', async () => {
+    downloadJson('study_qualifications.json', await loadStoredCollection(QUALIFICATIONS_STORAGE_KEY, STUDY_SUBMISSION_CONFIG.qualificationsTable));
+  });
+  document.getElementById('refreshButton').addEventListener('click', render);
+  document.getElementById('clearButton').addEventListener('click', () => {
+    if (!confirm('Clear all responses, qualifications, survey answers, and completion records saved in this browser? This cannot be undone. (Does not delete anything already sent to a remote database.)')) return;
+    localStorage.removeItem(RESPONSES_STORAGE_KEY);
+    localStorage.removeItem(QUALIFICATIONS_STORAGE_KEY);
+    localStorage.removeItem(POST_SURVEY_STORAGE_KEY);
+    localStorage.removeItem(COMPLETIONS_STORAGE_KEY);
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>

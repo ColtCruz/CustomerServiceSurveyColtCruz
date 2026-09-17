@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Service Conversation Review</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f7f8fb; color: #222; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 16px; }
+    h1, h2, h3 { margin-top: 0; }
+    .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    select, button, input[type=text] { padding: 10px 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+    button { background: #2563eb; color: white; cursor: pointer; border: none; }
+    button.secondary { background: #6b7280; }
+    button:disabled { background: #9ca3af; cursor: not-allowed; }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    .panel { border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; background: #fcfcfd; }
+    .chat-window { height: 420px; overflow-y: auto; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px; background: white; }
+    .bubble { margin: 8px 0; padding: 10px 12px; border-radius: 10px; max-width: 85%; }
+    .customer { background: #eff6ff; margin-left: auto; }
+    .agent { background: #f3f4f6; }
+    .handoff { background: #dcfce7; }
+    .input-row { display: flex; gap: 8px; margin-top: 10px; }
+    .input-row input[type=text] { flex: 1; }
+    .metric-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .metric { background: #f9fafb; padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; }
+    .metric .label { color: #6b7280; }
+    .small { font-size: 12px; color: #6b7280; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: bold; }
+    .badge.negative { background: #fee2e2; color: #991b1b; }
+    .badge.neutral { background: #f3f4f6; color: #374151; }
+    .badge.positive { background: #dcfce7; color: #166534; }
+    .badge.on { background: #fee2e2; color: #991b1b; }
+    .badge.off { background: #f3f4f6; color: #9ca3af; }
+    .hidden { display: none; }
+    .quick-replies { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 10px 12px; margin: 6px 0 8px 0; max-width: 90%; }
+    .quick-replies .quick-replies-label { font-size: 12px; font-weight: bold; color: #1d4ed8; margin-bottom: 8px; }
+    .quick-replies .quick-replies-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .quick-replies button { background: white; color: #1d4ed8; border: 1px solid #2563eb; font-size: 14px; font-weight: 600; padding: 8px 14px; }
+    .quick-replies button:hover { background: #2563eb; color: white; }
+    .intake-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+    .intake-row input[type=text], .intake-row input[type=email] { flex: 1; min-width: 200px; }
+    .likert-item { margin-bottom: 0; }
+    .likert-item .likert-text { font-size: 14px; margin-bottom: 8px; font-weight: 600; }
+    .likert-scale { display: flex; justify-content: space-between; gap: 4px; }
+    .likert-scale .likert-option { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #6b7280; flex: 1; text-align: center; gap: 4px; }
+
+    .survey-progress { font-size: 12px; color: #6b7280; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .survey-section-title { margin: 2px 0 16px; }
+    .survey-question { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid #e5e7eb; }
+    .survey-question:last-child { border-bottom: none; }
+    .survey-question-text { font-size: 14px; margin-bottom: 10px; font-weight: 600; }
+    .survey-nav { justify-content: space-between; margin-top: 16px; }
+    .survey-nav button.secondary { margin-right: auto; }
+
+    .mc-options, .checkbox-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-options label, .checkbox-options label { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+
+    .survey-textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: inherit; font-size: 14px; resize: vertical; }
+
+    .ranking-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .ranking-list li { display: flex; align-items: center; gap: 10px; background: #f9fafb; border-radius: 8px; padding: 8px 10px; font-size: 13.5px; }
+    .ranking-list .rank-num { font-weight: bold; color: #2563eb; width: 18px; }
+    .ranking-list .rank-label { flex: 1; }
+    .ranking-list .rank-move { padding: 2px 8px; font-size: 12px; }
+
+    table.survey-matrix { border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 4px; }
+    table.survey-matrix th, table.survey-matrix td { border: 1px solid #e5e7eb; padding: 8px; text-align: center; }
+    table.survey-matrix th:first-child, table.survey-matrix td:first-child { text-align: left; color: #374151; font-weight: normal; }
+    table.survey-matrix thead th { color: #6b7280; font-weight: 600; font-size: 12px; }
+
+    table.researcher-table { border-collapse: collapse; width: 100%; font-size: 12.5px; table-layout: fixed; border-radius: 12px; overflow: hidden; }
+    table.researcher-table th, table.researcher-table td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; white-space: normal; overflow-wrap: anywhere; word-break: break-word; vertical-align: top; }
+    table.researcher-table thead th { background: linear-gradient(180deg, #f8fafc, #eef4ff); color: #374151; font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+    table.researcher-table tbody tr { transition: background 0.2s ease, transform 0.2s ease; }
+    table.researcher-table tbody tr:nth-child(even) { background: #f9fafb; }
+    table.researcher-table tbody tr:hover { background: #f3f8ff; }
+    .signal-pill, .metric-pill, .boolean-pill { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 4px 8px; font-size: 11px; font-weight: 700; line-height: 1.2; }
+    .signal-positive { background: rgba(22, 163, 74, 0.12); color: #166534; }
+    .signal-neutral { background: rgba(148, 163, 184, 0.16); color: #334155; }
+    .signal-negative { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .metric-good { background: rgba(34, 197, 94, 0.12); color: #166534; }
+    .metric-warning { background: rgba(251, 191, 36, 0.18); color: #92400e; }
+    .metric-danger { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .boolean-yes { background: rgba(59, 130, 246, 0.12); color: #1d4ed8; }
+    .boolean-no { background: rgba(148, 163, 184, 0.12); color: #475569; }
+    .result-signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 12px 0 16px; }
+    .result-signal-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 12px 10px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04); }
+    .result-signal-card .label { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+    .result-signal-value { font-size: 20px; line-height: 1.1; font-weight: 700; color: #111827; }
+    .result-signal-card.sentiment { border-top: 4px solid #2563eb; }
+    .result-signal-card.frustration { border-top: 4px solid #f59e0b; }
+    .result-signal-card.anger { border-top: 4px solid #ef4444; }
+    .result-signal-card.urgency { border-top: 4px solid #f97316; }
+    .result-signal-card.confusion { border-top: 4px solid #8b5cf6; }
+    .result-signal-card.risk { border-top: 4px solid #dc2626; }
+    .signal-tag { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .signal-tag.positive { background: rgba(34, 197, 94, 0.12); color: #166534; }
+    .signal-tag.neutral { background: rgba(96, 165, 250, 0.12); color: #1d4ed8; }
+    .signal-tag.negative { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .signal-tag.warn { background: rgba(245, 158, 11, 0.14); color: #92400e; }
+    .signal-tag.alert { background: rgba(239, 68, 68, 0.14); color: #991b1b; }
+    .result-table-wrap { overflow-x: hidden; }
+    .task-banner { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; font-size: 13px; }
+
+    .results-shell { max-width: 1180px; margin: 0 auto; }
+    .results-header { margin-bottom: 20px; }
+    .results-title { margin: 0 0 6px; font-size: clamp(2rem, 2.4vw, 2.8rem); line-height: 1.1; }
+    .results-subtitle { margin: 0; color: #475569; font-size: 1.05rem; }
+    .results-overview { display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 16px; margin: 22px 0 28px; }
+    .results-metric-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px 18px 16px; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06); }
+    .results-metric-label { display: block; color: #475569; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .results-metric-value { font-size: clamp(1.8rem, 2vw, 2.5rem); font-weight: 800; line-height: 1.1; color: #0f172a; margin-bottom: 8px; }
+    .results-metric-note { display: block; color: #334155; font-size: 0.92rem; font-weight: 600; }
+    .results-overview-table { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04); overflow: hidden; margin-bottom: 24px; }
+    .results-overview-table table { width: 100%; border-collapse: collapse; }
+    .results-overview-table th, .results-overview-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    .results-overview-table th { background: #f8fafc; color: #334155; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .results-overview-table td { font-size: 0.98rem; }
+    .result-status-badge, .result-pill, .result-flag { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 5px 10px; font-size: 0.76rem; font-weight: 700; line-height: 1; }
+    .result-status-badge.agreement, .result-pill.agreement, .result-flag.agreement { background: rgba(34, 197, 94, 0.12); color: #166534; }
+    .result-status-badge.disagreement, .result-pill.disagreement, .result-flag.disagreement { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .result-status-badge.escalate, .result-pill.escalate, .result-flag.escalate { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .result-status-badge.no-escalate, .result-pill.no-escalate, .result-flag.no-escalate { background: rgba(59, 130, 246, 0.12); color: #1d4ed8; }
+    .result-signal-meter { display: grid; grid-template-columns: minmax(110px, 150px) minmax(180px, 1fr) 54px; gap: 10px; align-items: center; margin-bottom: 10px; }
+    .signal-meter-label { font-size: 0.8rem; color: #334155; font-weight: 700; }
+    .signal-meter-track { position: relative; height: 12px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+    .signal-meter-fill { position: absolute; inset: 0 auto 0 0; border-radius: 999px; }
+    .signal-meter-fill.positive { background: linear-gradient(90deg, #22c55e, #16a34a); }
+    .signal-meter-fill.neutral { background: linear-gradient(90deg, #60a5fa, #3b82f6); }
+    .signal-meter-fill.warning { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+    .signal-meter-fill.danger { background: linear-gradient(90deg, #f87171, #ef4444); }
+    .signal-meter-value { justify-self: end; font-size: 0.78rem; color: #0f172a; font-weight: 700; }
+    .results-conversation-card { display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05); margin-bottom: 18px; overflow: hidden; }
+    .results-conversation-card summary { list-style: none; cursor: pointer; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(180deg, #ffffff, #f8fafc); }
+    .results-conversation-card summary::-webkit-details-marker { display: none; }
+    .results-conversation-card summary .summary-main { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .results-conversation-card summary .summary-title { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
+    .results-conversation-card summary .summary-meta { display: flex; gap: 8px; flex-wrap: wrap; color: #475569; font-size: 0.86rem; }
+    .results-conversation-card summary .summary-meta strong { color: #0f172a; }
+    .results-conversation-body { padding: 20px; background: #fff; }
+    .results-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px; margin-bottom: 18px; }
+    .results-section h4 { margin: 0 0 14px; font-size: 1.08rem; color: #0f172a; }
+    .results-decision-grid { display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 14px; }
+    .decision-card { border-radius: 14px; padding: 16px; border: 1px solid #e2e8f0; background: #fff; }
+    .decision-card.participant { border-left: 5px solid #2563eb; }
+    .decision-card.ai { border-left: 5px solid #f59e0b; }
+    .decision-card.disagreement { border-left: 5px solid #ef4444; box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.1); }
+    .decision-card .decision-label { display: block; font-size: 0.78rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 8px; }
+    .decision-card .decision-value { font-size: 1.45rem; font-weight: 800; color: #0f172a; }
+    .agreement-banner { margin-top: 16px; padding: 12px 14px; border-radius: 12px; font-weight: 700; }
+    .agreement-banner.agreement { background: rgba(34, 197, 94, 0.1); color: #166534; border: 1px solid rgba(34, 197, 94, 0.18); }
+    .agreement-banner.disagreement { background: rgba(239, 68, 68, 0.09); color: #991b1b; border: 1px solid rgba(239, 68, 68, 0.16); }
+    .sentiment-summary-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .sentiment-summary-badge { display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 999px; font-weight: 800; font-size: 0.86rem; }
+    .sentiment-summary-badge.positive { background: rgba(34, 197, 94, 0.12); color: #166534; }
+    .sentiment-summary-badge.neutral { background: rgba(59, 130, 246, 0.12); color: #1d4ed8; }
+    .sentiment-summary-badge.negative { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .sentiment-score-inline { font-size: 0.95rem; color: #334155; font-weight: 700; }
+    .chart-wrap { background: #fff; border-radius: 14px; border: 1px solid #e2e8f0; padding: 12px; }
+    .chart-shell { position: relative; min-height: 320px; }
+    .chart-shell svg { width: 100%; height: 100%; min-height: 320px; display: block; }
+    .escalation-trigger-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .escalation-trigger-tag { display: inline-flex; border-radius: 999px; padding: 6px 10px; font-size: 0.76rem; font-weight: 700; background: rgba(59, 130, 246, 0.12); color: #1d4ed8; }
+    .escalation-trigger-tag.warning { background: rgba(245, 158, 11, 0.12); color: #92400e; }
+    .escalation-trigger-tag.danger { background: rgba(239, 68, 68, 0.12); color: #991b1b; }
+    .turn-card { border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; margin-bottom: 10px; overflow: hidden; }
+    .turn-card summary { list-style: none; cursor: pointer; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .turn-card summary::-webkit-details-marker { display: none; }
+    .turn-card summary .turn-summary-main { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .turn-card summary .turn-summary-main strong { font-size: 0.98rem; }
+    .turn-card summary .turn-summary-main .turn-summary-label { font-size: 0.8rem; color: #475569; }
+    .turn-card .turn-body { padding: 0 14px 14px; }
+    .turn-body-grid { display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 12px; }
+    .turn-body-item { border: 1px solid #e5e7eb; background: #f8fafc; border-radius: 10px; padding: 10px 12px; }
+    .turn-body-item .key { display: block; color: #475569; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 6px; }
+    .turn-body-item .value { font-size: 0.96rem; font-weight: 700; color: #0f172a; }
+    .turn-message { margin-top: 12px; border-top: 1px solid #e5e7eb; padding-top: 12px; font-size: 0.96rem; line-height: 1.6; color: #1e293b; }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } .results-overview { grid-template-columns: 1fr 1fr; } .results-decision-grid, .turn-body-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .results-overview { grid-template-columns: 1fr; } .result-signal-meter { grid-template-columns: 1fr; } .results-conversation-card summary { align-items: flex-start; flex-direction: column; } }
+    @media (max-width: 800px) { .page { padding: 18px 14px; } }
+
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 800px) { .dashboard-grid { grid-template-columns: 1fr; } }
+    .dashboard-grid .panel h3 { font-size: 14px; margin-bottom: 4px; }
+    .dashboard-grid .panel p.small { margin-top: 0; margin-bottom: 10px; }
+    .dataset-preview-list { display: flex; flex-direction: column; gap: 12px; }
+    .dataset-preview-item { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 14px; background: #f9fafb; }
+    .dataset-preview-item h4 { margin: 0 0 8px; font-size: 14px; }
+    .dataset-preview-item ol { margin: 0; padding-left: 20px; }
+    .dataset-preview-item li { margin-bottom: 8px; line-height: 1.5; }
+    .simple-study-shell { max-width: 760px; margin: 0 auto; }
+    .study-progress { height: 10px; border-radius: 999px; background: #e5e7eb; overflow: hidden; margin: 12px 0 18px; }
+    .study-progress-bar { height: 100%; border-radius: 999px; background: #2563eb; transition: width 0.2s ease; }
+    .study-choice-group { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+    .study-choice-button {
+      width: 100%; border: 2px solid #d1d5db; border-radius: 12px; background: #fff; color: #111827;
+      padding: 16px 18px; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.2s ease;
+    }
+    .study-choice-button.selected { border-color: #2563eb; background: #eff6ff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+    .study-choice-button:hover { border-color: #2563eb; }
+    .study-transcript { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .study-message { max-width: 82%; padding: 12px 14px; border-radius: 14px; line-height: 1.5; }
+    .study-message.customer { margin-left: auto; background: #eff6ff; border-bottom-right-radius: 4px; }
+    .study-message.agent { margin-right: auto; background: #f3f4f6; border-bottom-left-radius: 4px; }
+    .study-message strong { display: block; margin-bottom: 4px; }
+    .chart-axis-label { font-size: 10px; fill: #9ca3af; font-family: Arial, sans-serif; }
+    .chart-category-label { font-size: 12px; fill: #374151; font-family: Arial, sans-serif; }
+    .chart-end-label { font-size: 12px; fill: #222; font-weight: bold; font-family: Arial, sans-serif; }
+    .chart-tooltip {
+      position: absolute; z-index: 10; pointer-events: none;
+      background: #111827; color: white; font-size: 12px; line-height: 1.4;
+      padding: 6px 10px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="consentCard" class="card hidden">
+      <h2>Customer-Service Conversation Review</h2>
+      <div class="small" style="line-height:1.6;">
+        <p><strong>Study Purpose:</strong> This study looks at how people decide whether a customer-service conversation should be handed off to a human representative.</p>
+        <p><strong>What You Will Do:</strong> You will read 25 customer-service conversations from an external dataset, one at a time. For each one, you will decide whether it should be transferred to a human customer-service representative, and you may optionally explain why.</p>
+        <p><strong>Data Collected:</strong> The study records your decision for each conversation and any optional explanation you provide. The conversations are not generated by you and come from an external research dataset.</p>
+        <p><strong>Voluntary Participation:</strong> Participation is voluntary. You may stop at any time by closing the study.</p>
+      </div>
+      <label style="display:flex; gap:8px; align-items:flex-start; margin-top:12px;">
+        <input type="checkbox" id="consentCheckbox" />
+        <span>I have read and understood the above, and I consent to participate in this study.</span>
+      </label>
+      <div class="controls" style="margin-top:12px;">
+        <button id="consentSubmitButton" disabled>Continue</button>
+        <button id="consentDeclineButton" class="secondary">I do not consent</button>
+      </div>
+    </div>
+
+    <div id="declineCard" class="card hidden">
+      <h2>Thanks for your time</h2>
+      <p>You've chosen not to participate. No data has been recorded. You may close this window.</p>
+    </div>
+
+    <div id="studyUnavailableCard" class="card hidden">
+      <h2>Study currently unavailable</h2>
+      <p id="studyUnavailableMessage" class="small">The study conversations could not be loaded.</p>
+    </div>
+
+    <div id="qualificationCard" class="card hidden">
+      <h2>A few questions before you begin</h2>
+      <p class="small">Please tell us a little about your customer-service background. This information is stored separately from your conversation reviews.</p>
+      <div class="intake-row" style="flex-direction:column; align-items:stretch; gap:16px;">
+        <label>
+          <span style="display:block; margin-bottom:6px; font-weight:600;">Current or previous customer-service job title</span>
+          <input type="text" id="qualJobTitle" placeholder="e.g. Support Team Lead" />
+        </label>
+        <label>
+          <span style="display:block; margin-bottom:6px; font-weight:600;">Years of customer-service experience</span>
+          <input type="text" id="qualYearsExperience" placeholder="e.g. 5" inputmode="numeric" />
+        </label>
+        <label>
+          <span style="display:block; margin-bottom:6px; font-weight:600;">Industry / customer-service environment</span>
+          <input type="text" id="qualIndustry" placeholder="e.g. E-commerce retail support" />
+        </label>
+        <div>
+          <span style="display:block; margin-bottom:6px; font-weight:600;">Have you personally made escalation/handoff decisions in your work?</span>
+          <label style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <input type="radio" name="qualHandoffExperience" value="yes" /> Yes
+          </label>
+          <label style="display:flex; align-items:center; gap:8px;">
+            <input type="radio" name="qualHandoffExperience" value="no" /> No
+          </label>
+        </div>
+      </div>
+      <p id="qualificationError" class="small" style="color:#991b1b;"></p>
+      <div class="controls" style="margin-top:16px;">
+        <button id="qualificationSubmitButton">Continue</button>
+      </div>
+    </div>
+
+    <div id="datasetReviewCard" class="card hidden">
+      <div class="simple-study-shell">
+        <div id="datasetReviewHeader"></div>
+        <div id="datasetReviewConversation"></div>
+        <div id="datasetReviewQuestions" style="margin-top:18px;"></div>
+        <div class="controls" style="margin-top:18px; justify-content: flex-end;">
+          <button id="datasetReviewNextButton" type="button" disabled>Next Conversation</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="postSurveyCard" class="card hidden">
+      <div class="simple-study-shell">
+        <h2>A few questions about your experience</h2>
+        <p class="small">This is about your customer-service experiences in general, not the conversations you just reviewed.</p>
+
+        <div class="survey-question">
+          <div class="survey-question-text">In the past 3 years, how often have you contacted customer service?</div>
+          <div class="mc-options">
+            <label><input type="radio" name="postSurveyQ1" value="0" /> 0 times</label>
+            <label><input type="radio" name="postSurveyQ1" value="1-2" /> 1–2 times</label>
+            <label><input type="radio" name="postSurveyQ1" value="3-5" /> 3–5 times</label>
+            <label><input type="radio" name="postSurveyQ1" value="6-10" /> 6–10 times</label>
+            <label><input type="radio" name="postSurveyQ1" value="more_than_10" /> More than 10 times</label>
+          </div>
+        </div>
+
+        <div class="survey-question">
+          <div class="survey-question-text">Of those customer-service experiences, how often was your issue resolved by the first representative you interacted with?</div>
+          <div class="mc-options">
+            <label><input type="radio" name="postSurveyQ2" value="never" /> Never</label>
+            <label><input type="radio" name="postSurveyQ2" value="rarely" /> Rarely</label>
+            <label><input type="radio" name="postSurveyQ2" value="sometimes" /> Sometimes</label>
+            <label><input type="radio" name="postSurveyQ2" value="often" /> Often</label>
+            <label><input type="radio" name="postSurveyQ2" value="always" /> Always</label>
+          </div>
+        </div>
+
+        <div class="survey-question">
+          <div class="survey-question-text">How often were you transferred to another representative or department before your issue was resolved?</div>
+          <div class="mc-options">
+            <label><input type="radio" name="postSurveyQ3" value="never" /> Never</label>
+            <label><input type="radio" name="postSurveyQ3" value="rarely" /> Rarely</label>
+            <label><input type="radio" name="postSurveyQ3" value="sometimes" /> Sometimes</label>
+            <label><input type="radio" name="postSurveyQ3" value="often" /> Often</label>
+            <label><input type="radio" name="postSurveyQ3" value="always" /> Always</label>
+          </div>
+        </div>
+
+        <div class="survey-question">
+          <div class="survey-question-text">How many different representatives did you typically interact with before your issue was resolved?</div>
+          <div class="mc-options">
+            <label><input type="radio" name="postSurveyQ4" value="1" /> 1</label>
+            <label><input type="radio" name="postSurveyQ4" value="2" /> 2</label>
+            <label><input type="radio" name="postSurveyQ4" value="3" /> 3</label>
+            <label><input type="radio" name="postSurveyQ4" value="4_or_more" /> 4 or more</label>
+            <label><input type="radio" name="postSurveyQ4" value="usually_not_resolved" /> Issue was usually not resolved</label>
+          </div>
+        </div>
+
+        <div class="survey-question">
+          <div class="survey-question-text">How satisfied have you generally been with your customer-service experiences during the past 3 years?</div>
+          <div class="mc-options">
+            <label><input type="radio" name="postSurveyQ5" value="very_dissatisfied" /> Very dissatisfied</label>
+            <label><input type="radio" name="postSurveyQ5" value="dissatisfied" /> Dissatisfied</label>
+            <label><input type="radio" name="postSurveyQ5" value="neutral" /> Neutral</label>
+            <label><input type="radio" name="postSurveyQ5" value="satisfied" /> Satisfied</label>
+            <label><input type="radio" name="postSurveyQ5" value="very_satisfied" /> Very satisfied</label>
+          </div>
+        </div>
+
+        <div class="survey-question">
+          <div class="survey-question-text">How often have you used automated customer-service systems such as chat or automated messaging?</div>
+          <div class="mc-options">
+            <label><input type="radio" name="postSurveyQ6" value="never" /> Never</label>
+            <label><input type="radio" name="postSurveyQ6" value="rarely" /> Rarely</label>
+            <label><input type="radio" name="postSurveyQ6" value="sometimes" /> Sometimes</label>
+            <label><input type="radio" name="postSurveyQ6" value="often" /> Often</label>
+            <label><input type="radio" name="postSurveyQ6" value="very_often" /> Very often</label>
+          </div>
+        </div>
+
+        <p id="postSurveyError" class="small" style="color:#991b1b;"></p>
+        <div class="controls" style="margin-top:8px; justify-content:center;">
+          <button id="postSurveySubmitButton" style="padding:14px 28px; font-size:16px;">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="taskCard" class="card hidden">
+      <div class="simple-study-shell">
+        <h2>How this study works</h2>
+        <div id="taskPrompt" class="panel" style="background:#ffffff; border-color:#e5e7eb; line-height:1.7; font-size:16px;">
+          <p style="margin:0 0 12px;">You will review 25 customer-service conversations, one at a time.</p>
+          <ol style="margin:0; padding-left:22px;">
+            <li>Read the full conversation.</li>
+            <li>Decide whether it should be transferred to a human customer-service representative.</li>
+            <li>Choose Yes or No.</li>
+            <li>Optionally, briefly explain your choice.</li>
+            <li>Continue to the next conversation.</li>
+          </ol>
+        </div>
+        <div class="controls" style="margin-top:18px; justify-content:center;">
+          <button id="taskStartButton" style="padding:14px 28px; font-size:16px;">Start Study</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="doneCard" class="card hidden">
+      <h2>Study complete</h2>
+      <p>You've reviewed all 25 conversations. Thank you for your participation.</p>
+    </div>
+  </div>
+
+  <script src="dataSubmission.js?v=20260917a"></script>
+  <script src="app.js?v=20260917a"></script>
+</body>
+</html>

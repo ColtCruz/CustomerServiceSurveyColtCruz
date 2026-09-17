@@ -1,0 +1,1952 @@
+[
+  {
+    "conversationId": "6",
+    "issueType": "account hacked",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Issue escalated and resolved within 24 hours with a confirmation email sent to the customer.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I wanted to reach out since account hacked and I need this resolved.",
+        "textRaw": "Hi, I wanted to reach out since account hacked and I need this resolved."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into account hacked for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into account hacked for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My account ID is 77341. The issue has been going on for 5 days.",
+        "textRaw": "My account ID is 77341. The issue has been going on for 5 days."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "How long will this take to fix?",
+        "textRaw": "How long will this take to fix?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours.",
+        "textRaw": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "All good, thanks a lot!",
+        "textRaw": "All good, thanks a lot!"
+      }
+    ]
+  },
+  {
+    "conversationId": "24",
+    "issueType": "account password reset not working",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Issue escalated and resolved within 24 hours with a confirmation email sent to the customer.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hey there, I need help. Account password reset not working.",
+        "textRaw": "Hey there, I need help. Account password reset not working."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into account password reset not working for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into account password reset not working for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Order ID: 990234. I've been waiting for a response all week.",
+        "textRaw": "Order ID: 990234. I've been waiting for a response all week."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours.",
+        "textRaw": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "80",
+    "issueType": "delivery address error",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Problem was identified on the company's end and fixed with a follow-up notification.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 delivery address error.",
+        "textRaw": "Hello, I have a complaint \u2014 delivery address error."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Thank you for contacting us. I understand your frustration with delivery address error. Can I verify your identity first?",
+        "textRaw": "Thank you for contacting us. I understand your frustration with delivery address error. Can I verify your identity first?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My email is customer@email.com.",
+        "textRaw": "My email is customer@email.com."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I found your order. I can confirm the error on our end. I'll initiate the correction now.",
+        "textRaw": "I found your order. I can confirm the error on our end. I'll initiate the correction now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "How long will this take to fix?",
+        "textRaw": "How long will this take to fix?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Fine. I'll give it 24 hours. Thank you.",
+        "textRaw": "Fine. I'll give it 24 hours. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Of course. I've already submitted the ticket. Reference number is TKT-20394.",
+        "textRaw": "Of course. I've already submitted the ticket. Reference number is TKT-20394."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "I received the reference number. I feel better knowing it's being handled.",
+        "textRaw": "I received the reference number. I feel better knowing it's being handled."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "You're very welcome! Is there anything else I can help you with today?",
+        "textRaw": "You're very welcome! Is there anything else I can help you with today?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nothing else. Really appreciate your help.",
+        "textRaw": "Nothing else. Really appreciate your help."
+      }
+    ]
+  },
+  {
+    "conversationId": "30",
+    "issueType": "gift card balance incorrect",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Issue escalated and resolved within 24 hours with a confirmation email sent to the customer.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "I'm calling about gift card balance incorrect. Can someone help me?",
+        "textRaw": "I'm calling about gift card balance incorrect. Can someone help me?"
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hi! I'm sorry to hear about this. To assist you with gift card balance incorrect, could you provide your account email?",
+        "textRaw": "Hi! I'm sorry to hear about this. To assist you with gift card balance incorrect, could you provide your account email?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Order ID: 990234. I've been waiting for a response all week.",
+        "textRaw": "Order ID: 990234. I've been waiting for a response all week."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I've been waiting for days already. I need a clear timeline.",
+        "textRaw": "I've been waiting for days already. I need a clear timeline."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day.",
+        "textRaw": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Okay, that sounds reasonable. Thank you.",
+        "textRaw": "Okay, that sounds reasonable. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "54",
+    "issueType": "invoice not received",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Customer received a reference ticket and the issue was resolved by the senior team.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hey there, I need help. Invoice not received.",
+        "textRaw": "Hey there, I need help. Invoice not received."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Good day! I'll personally help you resolve invoice not received. Could you share your order ID?",
+        "textRaw": "Good day! I'll personally help you resolve invoice not received. Could you share your order ID?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Here's the reference: REF-44210.",
+        "textRaw": "Here's the reference: REF-44210."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I found your order. I can confirm the error on our end. I'll initiate the correction now.",
+        "textRaw": "I found your order. I can confirm the error on our end. I'll initiate the correction now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email.",
+        "textRaw": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Fine. I'll give it 24 hours. Thank you.",
+        "textRaw": "Fine. I'll give it 24 hours. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Wonderful! We appreciate your patience. Anything else I can do for you?",
+        "textRaw": "Wonderful! We appreciate your patience. Anything else I can do for you?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nope, I'm satisfied. Thank you.",
+        "textRaw": "Nope, I'm satisfied. Thank you."
+      }
+    ]
+  },
+  {
+    "conversationId": "72",
+    "issueType": "item missing from package",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Problem was identified on the company's end and fixed with a follow-up notification.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 item missing from package.",
+        "textRaw": "Hello, I have a complaint \u2014 item missing from package."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into item missing from package for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into item missing from package for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Sure, my order number is #ORD-88421.",
+        "textRaw": "Sure, my order number is #ORD-88421."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I just want to know when this will be resolved.",
+        "textRaw": "I just want to know when this will be resolved."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email.",
+        "textRaw": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Okay, that sounds reasonable. Thank you.",
+        "textRaw": "Okay, that sounds reasonable. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Of course. I've already submitted the ticket. Reference number is TKT-20394.",
+        "textRaw": "Of course. I've already submitted the ticket. Reference number is TKT-20394."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Thank you for the quick action. I feel much better now.",
+        "textRaw": "Thank you for the quick action. I feel much better now."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "You're very welcome! Is there anything else I can help you with today?",
+        "textRaw": "You're very welcome! Is there anything else I can help you with today?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nothing else. Really appreciate your help.",
+        "textRaw": "Nothing else. Really appreciate your help."
+      }
+    ]
+  },
+  {
+    "conversationId": "76",
+    "issueType": "loyalty points missing",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "elderly user",
+    "resolution": "Customer received a reference ticket and the issue was resolved by the senior team.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I wanted to reach out since loyalty points missing and I need this resolved.",
+        "textRaw": "Hi, I wanted to reach out since loyalty points missing and I need this resolved."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into loyalty points missing for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into loyalty points missing for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My email is customer@email.com.",
+        "textRaw": "My email is customer@email.com."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Done. I've sent you a confirmation to your email with all the details.",
+        "textRaw": "Done. I've sent you a confirmation to your email with all the details."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nope, I'm satisfied. Thank you.",
+        "textRaw": "Nope, I'm satisfied. Thank you."
+      }
+    ]
+  },
+  {
+    "conversationId": "92",
+    "issueType": "order cancelled without notice",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hey there, I need help. Order cancelled without notice.",
+        "textRaw": "Hey there, I need help. Order cancelled without notice."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into order cancelled without notice for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into order cancelled without notice for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My email is customer@email.com.",
+        "textRaw": "My email is customer@email.com."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I found your order. I can confirm the error on our end. I'll initiate the correction now.",
+        "textRaw": "I found your order. I can confirm the error on our end. I'll initiate the correction now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "How long will this take to fix?",
+        "textRaw": "How long will this take to fix?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day.",
+        "textRaw": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "50",
+    "issueType": "order never arrived",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Problem was identified on the company's end and fixed with a follow-up notification.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I'm contacting you because order never arrived.",
+        "textRaw": "Hi, I'm contacting you because order never arrived."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Thank you for contacting us. I understand your frustration with order never arrived. Can I verify your identity first?",
+        "textRaw": "Thank you for contacting us. I understand your frustration with order never arrived. Can I verify your identity first?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Order ID: 990234. I've been waiting for a response all week.",
+        "textRaw": "Order ID: 990234. I've been waiting for a response all week."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I just want to know when this will be resolved.",
+        "textRaw": "I just want to know when this will be resolved."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email.",
+        "textRaw": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Okay, that sounds reasonable. Thank you.",
+        "textRaw": "Okay, that sounds reasonable. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "I received the reference number. I feel better knowing it's being handled.",
+        "textRaw": "I received the reference number. I feel better knowing it's being handled."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nothing else. Really appreciate your help.",
+        "textRaw": "Nothing else. Really appreciate your help."
+      }
+    ]
+  },
+  {
+    "conversationId": "84",
+    "issueType": "package damaged on delivery",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Customer received a reference ticket and the issue was resolved by the senior team.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Good morning. I'm frustrated because package damaged on delivery.",
+        "textRaw": "Good morning. I'm frustrated because package damaged on delivery."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into package damaged on delivery for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into package damaged on delivery for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Here's the reference: REF-44210.",
+        "textRaw": "Here's the reference: REF-44210."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Got it. I can see your record. This should not have happened. I'll fix this right away.",
+        "textRaw": "Got it. I can see your record. This should not have happened. I'll fix this right away."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I've been waiting for days already. I need a clear timeline.",
+        "textRaw": "I've been waiting for days already. I need a clear timeline."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email.",
+        "textRaw": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Fine. I'll give it 24 hours. Thank you.",
+        "textRaw": "Fine. I'll give it 24 hours. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "The discount is a nice touch. Thank you for that.",
+        "textRaw": "The discount is a nice touch. Thank you for that."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "78",
+    "issueType": "promo code not applied",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Customer received a reference ticket and the issue was resolved by the senior team.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I wanted to reach out since promo code not applied and I need this resolved.",
+        "textRaw": "Hi, I wanted to reach out since promo code not applied and I need this resolved."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hi! I'm sorry to hear about this. To assist you with promo code not applied, could you provide your account email?",
+        "textRaw": "Hi! I'm sorry to hear about this. To assist you with promo code not applied, could you provide your account email?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Order ID: 990234. I've been waiting for a response all week.",
+        "textRaw": "Order ID: 990234. I've been waiting for a response all week."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "How long will this take to fix?",
+        "textRaw": "How long will this take to fix?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours.",
+        "textRaw": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Thank you for the quick action. I feel much better now.",
+        "textRaw": "Thank you for the quick action. I feel much better now."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Wonderful! We appreciate your patience. Anything else I can do for you?",
+        "textRaw": "Wonderful! We appreciate your patience. Anything else I can do for you?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "12",
+    "issueType": "refund not processed",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Issue escalated and resolved within 24 hours with a confirmation email sent to the customer.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I wanted to reach out since refund not processed and I need this resolved.",
+        "textRaw": "Hi, I wanted to reach out since refund not processed and I need this resolved."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hi! I'm sorry to hear about this. To assist you with refund not processed, could you provide your account email?",
+        "textRaw": "Hi! I'm sorry to hear about this. To assist you with refund not processed, could you provide your account email?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Sure, my order number is #ORD-88421.",
+        "textRaw": "Sure, my order number is #ORD-88421."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Got it. I can see your record. This should not have happened. I'll fix this right away.",
+        "textRaw": "Got it. I can see your record. This should not have happened. I'll fix this right away."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "The discount is a nice touch. Thank you for that.",
+        "textRaw": "The discount is a nice touch. Thank you for that."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "All good, thanks a lot!",
+        "textRaw": "All good, thanks a lot!"
+      }
+    ]
+  },
+  {
+    "conversationId": "31",
+    "issueType": "return not accepted",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "frustrated user",
+    "resolution": "Customer received a reference ticket and the issue was resolved by the senior team.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 return not accepted.",
+        "textRaw": "Hello, I have a complaint \u2014 return not accepted."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into return not accepted for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into return not accepted for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My account ID is 77341. The issue has been going on for 5 days.",
+        "textRaw": "My account ID is 77341. The issue has been going on for 5 days."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I found your order. I can confirm the error on our end. I'll initiate the correction now.",
+        "textRaw": "I found your order. I can confirm the error on our end. I'll initiate the correction now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I hope it's quick, I need this resolved today.",
+        "textRaw": "I hope it's quick, I need this resolved today."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nothing else. Really appreciate your help.",
+        "textRaw": "Nothing else. Really appreciate your help."
+      }
+    ]
+  },
+  {
+    "conversationId": "18",
+    "issueType": "subscription charged twice",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I wanted to reach out since subscription charged twice and I need this resolved.",
+        "textRaw": "Hi, I wanted to reach out since subscription charged twice and I need this resolved."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Good day! I'll personally help you resolve subscription charged twice. Could you share your order ID?",
+        "textRaw": "Good day! I'll personally help you resolve subscription charged twice. Could you share your order ID?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My account ID is 77341. The issue has been going on for 5 days.",
+        "textRaw": "My account ID is 77341. The issue has been going on for 5 days."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Got it. I can see your record. This should not have happened. I'll fix this right away.",
+        "textRaw": "Got it. I can see your record. This should not have happened. I'll fix this right away."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I hope it's quick, I need this resolved today.",
+        "textRaw": "I hope it's quick, I need this resolved today."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email.",
+        "textRaw": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nothing else. Really appreciate your help.",
+        "textRaw": "Nothing else. Really appreciate your help."
+      }
+    ]
+  },
+  {
+    "conversationId": "36",
+    "issueType": "wrong item received",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Issue escalated and resolved within 24 hours with a confirmation email sent to the customer.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 wrong item received.",
+        "textRaw": "Hello, I have a complaint \u2014 wrong item received."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Thank you for contacting us. I understand your frustration with wrong item received. Can I verify your identity first?",
+        "textRaw": "Thank you for contacting us. I understand your frustration with wrong item received. Can I verify your identity first?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My account ID is 77341. The issue has been going on for 5 days.",
+        "textRaw": "My account ID is 77341. The issue has been going on for 5 days."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I hope it's quick, I need this resolved today.",
+        "textRaw": "I hope it's quick, I need this resolved today."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email.",
+        "textRaw": "I completely understand. This will be resolved within 24 to 48 hours. I'll send you a confirmation email."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "The discount is a nice touch. Thank you for that.",
+        "textRaw": "The discount is a nice touch. Thank you for that."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "All good, thanks a lot!",
+        "textRaw": "All good, thanks a lot!"
+      }
+    ]
+  },
+  {
+    "conversationId": "48",
+    "issueType": "account hacked",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 account hacked.",
+        "textRaw": "Hello, I have a complaint \u2014 account hacked."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into account hacked for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into account hacked for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Sure, my order number is #ORD-88421.",
+        "textRaw": "Sure, my order number is #ORD-88421."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I found your order. I can confirm the error on our end. I'll initiate the correction now.",
+        "textRaw": "I found your order. I can confirm the error on our end. I'll initiate the correction now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Done. I've sent you a confirmation to your email with all the details.",
+        "textRaw": "Done. I've sent you a confirmation to your email with all the details."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "The discount is a nice touch. Thank you for that.",
+        "textRaw": "The discount is a nice touch. Thank you for that."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "26",
+    "issueType": "account password reset not working",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Issue escalated and resolved within 24 hours with a confirmation email sent to the customer.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I'm contacting you because account password reset not working.",
+        "textRaw": "Hi, I'm contacting you because account password reset not working."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into account password reset not working for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into account password reset not working for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My account ID is 77341. The issue has been going on for 5 days.",
+        "textRaw": "My account ID is 77341. The issue has been going on for 5 days."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Got it. I can see your record. This should not have happened. I'll fix this right away.",
+        "textRaw": "Got it. I can see your record. This should not have happened. I'll fix this right away."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I've been waiting for days already. I need a clear timeline.",
+        "textRaw": "I've been waiting for days already. I need a clear timeline."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Okay, that sounds reasonable. Thank you.",
+        "textRaw": "Okay, that sounds reasonable. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "I received the reference number. I feel better knowing it's being handled.",
+        "textRaw": "I received the reference number. I feel better knowing it's being handled."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "No, that's all. Thank you!",
+        "textRaw": "No, that's all. Thank you!"
+      }
+    ]
+  },
+  {
+    "conversationId": "98",
+    "issueType": "delivery address error",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I'm contacting you because delivery address error.",
+        "textRaw": "Hi, I'm contacting you because delivery address error."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hi! I'm sorry to hear about this. To assist you with delivery address error, could you provide your account email?",
+        "textRaw": "Hi! I'm sorry to hear about this. To assist you with delivery address error, could you provide your account email?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Here's the reference: REF-44210.",
+        "textRaw": "Here's the reference: REF-44210."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Got it. I can see your record. This should not have happened. I'll fix this right away.",
+        "textRaw": "Got it. I can see your record. This should not have happened. I'll fix this right away."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day.",
+        "textRaw": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "The discount is a nice touch. Thank you for that.",
+        "textRaw": "The discount is a nice touch. Thank you for that."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "All good, thanks a lot!",
+        "textRaw": "All good, thanks a lot!"
+      }
+    ]
+  },
+  {
+    "conversationId": "66",
+    "issueType": "gift card balance incorrect",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Customer received a reference ticket and the issue was resolved by the senior team.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Good morning. I'm frustrated because gift card balance incorrect.",
+        "textRaw": "Good morning. I'm frustrated because gift card balance incorrect."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Thank you for contacting us. I understand your frustration with gift card balance incorrect. Can I verify your identity first?",
+        "textRaw": "Thank you for contacting us. I understand your frustration with gift card balance incorrect. Can I verify your identity first?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Sure, my order number is #ORD-88421.",
+        "textRaw": "Sure, my order number is #ORD-88421."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "I've located your account. I sincerely apologize. Let me process the resolution now.",
+        "textRaw": "I've located your account. I sincerely apologize. Let me process the resolution now."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "How long will this take to fix?",
+        "textRaw": "How long will this take to fix?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day.",
+        "textRaw": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Alright, I'll wait. But please make sure it's sorted.",
+        "textRaw": "Alright, I'll wait. But please make sure it's sorted."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "The discount is a nice touch. Thank you for that.",
+        "textRaw": "The discount is a nice touch. Thank you for that."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "No, that's all. Thank you!",
+        "textRaw": "No, that's all. Thank you!"
+      }
+    ]
+  },
+  {
+    "conversationId": "20",
+    "issueType": "invoice not received",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Problem was identified on the company's end and fixed with a follow-up notification.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Good morning. I'm frustrated because invoice not received.",
+        "textRaw": "Good morning. I'm frustrated because invoice not received."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hi! I'm sorry to hear about this. To assist you with invoice not received, could you provide your account email?",
+        "textRaw": "Hi! I'm sorry to hear about this. To assist you with invoice not received, could you provide your account email?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My email is customer@email.com.",
+        "textRaw": "My email is customer@email.com."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Got it. I can see your record. This should not have happened. I'll fix this right away.",
+        "textRaw": "Got it. I can see your record. This should not have happened. I'll fix this right away."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I hope it's quick, I need this resolved today.",
+        "textRaw": "I hope it's quick, I need this resolved today."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day.",
+        "textRaw": "I hear you. I'm processing the fix right now \u2014 you'll receive an update within one business day."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Of course. I've already submitted the ticket. Reference number is TKT-20394.",
+        "textRaw": "Of course. I've already submitted the ticket. Reference number is TKT-20394."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Thank you for the quick action. I feel much better now.",
+        "textRaw": "Thank you for the quick action. I feel much better now."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "That's everything. Great service!",
+        "textRaw": "That's everything. Great service!"
+      }
+    ]
+  },
+  {
+    "conversationId": "90",
+    "issueType": "item missing from package",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 item missing from package.",
+        "textRaw": "Hello, I have a complaint \u2014 item missing from package."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Thank you for contacting us. I understand your frustration with item missing from package. Can I verify your identity first?",
+        "textRaw": "Thank you for contacting us. I understand your frustration with item missing from package. Can I verify your identity first?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Sure, my order number is #ORD-88421.",
+        "textRaw": "Sure, my order number is #ORD-88421."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "How long will this take to fix?",
+        "textRaw": "How long will this take to fix?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Thank you for the quick action. I feel much better now.",
+        "textRaw": "Thank you for the quick action. I feel much better now."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "You're very welcome! Is there anything else I can help you with today?",
+        "textRaw": "You're very welcome! Is there anything else I can help you with today?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "No, that's all. Thank you!",
+        "textRaw": "No, that's all. Thank you!"
+      }
+    ]
+  },
+  {
+    "conversationId": "100",
+    "issueType": "loyalty points missing",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "elderly user",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I'm contacting you because loyalty points missing.",
+        "textRaw": "Hi, I'm contacting you because loyalty points missing."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hi! I'm sorry to hear about this. To assist you with loyalty points missing, could you provide your account email?",
+        "textRaw": "Hi! I'm sorry to hear about this. To assist you with loyalty points missing, could you provide your account email?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My account ID is 77341. The issue has been going on for 5 days.",
+        "textRaw": "My account ID is 77341. The issue has been going on for 5 days."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours.",
+        "textRaw": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Thank you for the quick action. I feel much better now.",
+        "textRaw": "Thank you for the quick action. I feel much better now."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Happy to help! Please reach out anytime if you need further assistance.",
+        "textRaw": "Happy to help! Please reach out anytime if you need further assistance."
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "All good, thanks a lot!",
+        "textRaw": "All good, thanks a lot!"
+      }
+    ]
+  },
+  {
+    "conversationId": "45",
+    "issueType": "order cancelled without notice",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "impatient executive",
+    "resolution": "Problem was identified on the company's end and fixed with a follow-up notification.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hello, I have a complaint \u2014 order cancelled without notice.",
+        "textRaw": "Hello, I have a complaint \u2014 order cancelled without notice."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Good day! I'll personally help you resolve order cancelled without notice. Could you share your order ID?",
+        "textRaw": "Good day! I'll personally help you resolve order cancelled without notice. Could you share your order ID?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Here's the reference: REF-44210.",
+        "textRaw": "Here's the reference: REF-44210."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours.",
+        "textRaw": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Fine. I'll give it 24 hours. Thank you.",
+        "textRaw": "Fine. I'll give it 24 hours. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Noted. The resolution is underway. You'll receive a follow-up shortly.",
+        "textRaw": "Noted. The resolution is underway. You'll receive a follow-up shortly."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "I received the reference number. I feel better knowing it's being handled.",
+        "textRaw": "I received the reference number. I feel better knowing it's being handled."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "Wonderful! We appreciate your patience. Anything else I can do for you?",
+        "textRaw": "Wonderful! We appreciate your patience. Anything else I can do for you?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "Nothing else. Really appreciate your help.",
+        "textRaw": "Nothing else. Really appreciate your help."
+      }
+    ]
+  },
+  {
+    "conversationId": "56",
+    "issueType": "order never arrived",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "confused beginner",
+    "resolution": "Problem was identified on the company's end and fixed with a follow-up notification.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hi, I wanted to reach out since order never arrived and I need this resolved.",
+        "textRaw": "Hi, I wanted to reach out since order never arrived and I need this resolved."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into order never arrived for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into order never arrived for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "My email is customer@email.com.",
+        "textRaw": "My email is customer@email.com."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "Can you guarantee this won't happen again?",
+        "textRaw": "Can you guarantee this won't happen again?"
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours.",
+        "textRaw": "Absolutely. I've flagged this as priority. You'll get a confirmation in the next few hours."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Good. I appreciate the quick response.",
+        "textRaw": "Good. I appreciate the quick response."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "Done. I've sent you a confirmation to your email with all the details.",
+        "textRaw": "Done. I've sent you a confirmation to your email with all the details."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Thank you for the quick action. I feel much better now.",
+        "textRaw": "Thank you for the quick action. I feel much better now."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "All good, thanks a lot!",
+        "textRaw": "All good, thanks a lot!"
+      }
+    ]
+  },
+  {
+    "conversationId": "96",
+    "issueType": "package damaged on delivery",
+    "industry": "customer service",
+    "product": "unknown",
+    "channel": "unknown",
+    "language": "en",
+    "customerType": "calm and patient user",
+    "resolution": "Agent processed the correction immediately and applied a courtesy discount.",
+    "turns": [
+      {
+        "turnNumber": 1,
+        "role": "customer",
+        "text": "Hey there, I need help. Package damaged on delivery.",
+        "textRaw": "Hey there, I need help. Package damaged on delivery."
+      },
+      {
+        "turnNumber": 2,
+        "role": "agent",
+        "text": "Hello! I sincerely apologize for the inconvenience. Let me look into package damaged on delivery for you. Can I have your order number?",
+        "textRaw": "Hello! I sincerely apologize for the inconvenience. Let me look into package damaged on delivery for you. Can I have your order number?"
+      },
+      {
+        "turnNumber": 3,
+        "role": "customer",
+        "text": "Sure, my order number is #ORD-88421.",
+        "textRaw": "Sure, my order number is #ORD-88421."
+      },
+      {
+        "turnNumber": 4,
+        "role": "agent",
+        "text": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately.",
+        "textRaw": "Thank you. I've pulled up your account. I can see the issue \u2014 let me escalate this immediately."
+      },
+      {
+        "turnNumber": 5,
+        "role": "customer",
+        "text": "I just want to know when this will be resolved.",
+        "textRaw": "I just want to know when this will be resolved."
+      },
+      {
+        "turnNumber": 6,
+        "role": "agent",
+        "text": "I understand the urgency. I'm escalating this to our senior team for immediate action.",
+        "textRaw": "I understand the urgency. I'm escalating this to our senior team for immediate action."
+      },
+      {
+        "turnNumber": 7,
+        "role": "customer",
+        "text": "Fine. I'll give it 24 hours. Thank you.",
+        "textRaw": "Fine. I'll give it 24 hours. Thank you."
+      },
+      {
+        "turnNumber": 8,
+        "role": "agent",
+        "text": "All set. I've also applied a 10% discount to your next order as an apology.",
+        "textRaw": "All set. I've also applied a 10% discount to your next order as an apology."
+      },
+      {
+        "turnNumber": 9,
+        "role": "customer",
+        "text": "Got the confirmation email. That's reassuring, thank you.",
+        "textRaw": "Got the confirmation email. That's reassuring, thank you."
+      },
+      {
+        "turnNumber": 10,
+        "role": "agent",
+        "text": "It's our pleasure. We truly value your loyalty. Anything else?",
+        "textRaw": "It's our pleasure. We truly value your loyalty. Anything else?"
+      },
+      {
+        "turnNumber": 11,
+        "role": "customer",
+        "text": "No, that's all. Thank you!",
+        "textRaw": "No, that's all. Thank you!"
+      }
+    ]
+  }
+]
