@@ -13,10 +13,10 @@
       --text: #1f2937;
       --muted: #6b7280;
       --ink: #111827;
-      --yes: #bbf7d0;
-      --yes-text: #166534;
-      --no: #dbeafe;
-      --no-text: #1d4ed8;
+      --yes: #fecaca;
+      --yes-text: #991b1b;
+      --no: #bbf7d0;
+      --no-text: #166534;
       --ai: #ede9fe;
       --ai-text: #5b21b6;
       --warn: #fef3c7;
@@ -659,23 +659,17 @@
       }
 
       const rows = conversationIds.map((conversationId) => {
-        const conversation = (state.conversations || []).find((item) => normalizeConversationId(item.conversationId) === conversationId) || {};
         const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
         const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
         const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
-        const aiDecision = aiRecord && aiRecord.aiHandoffDecision !== undefined ? aiRecord.aiHandoffDecision : null;
-        const professionalText = professionalSummary.total
-          ? `${professionalSummary.yes}/${professionalSummary.total} Yes • ${professionalSummary.no}/${professionalSummary.total} No`
-          : 'No professional responses';
+        const aiDecision = aiRecord && aiRecord.aiHandoffDecision !== undefined ? Boolean(aiRecord.aiHandoffDecision) : null;
+        const professionalDecision = professionalSummary.total ? professionalSummary.majority : null;
         const escalationTurn = aiRecord && aiRecord.escalationTurn !== null && aiRecord.escalationTurn !== undefined ? aiRecord.escalationTurn : '—';
-        const participantMajority = participantSummary.total ? (participantSummary.yes > participantSummary.no ? true : false) : null;
-        const professionalMajority = professionalSummary.total ? (professionalSummary.yes > professionalSummary.no ? true : false) : null;
-        const agreement = (() => {
-          if (participantMajority === null || professionalMajority === null || aiDecision === null) return '—';
-          const t = [participantMajority === aiDecision, professionalMajority === aiDecision].filter(Boolean).length;
-          return `${t}/2 aligned`;
-        })();
         const displayIndex = getConversationDisplayNumber(conversationId);
+
+        const decisionPill = (decision) => decision === null
+          ? '<span class="pill neutral">—</span>'
+          : `<span class="pill ${decision ? 'yes' : 'no'}">${decision ? 'Yes' : 'No'}</span>`;
 
         return `
           <tr class="conversation-row ${state.selectedConversationId === conversationId ? 'selected' : ''}" data-conversation-id="${escapeHtml(conversationId)}" tabindex="0">
@@ -683,10 +677,9 @@
             <td>${participantSummary.total ? participantSummary.yes : 0}</td>
             <td>${participantSummary.total ? participantSummary.no : 0}</td>
             <td>${participantSummary.total ? `${participantSummary.rate}%` : '0%'}</td>
-            <td>${escapeHtml(professionalText)}</td>
-            <td>${aiDecision === null ? '<span class="pill neutral">—</span>' : `<span class="pill ${aiDecision ? 'ai' : 'yes'}">${aiDecision ? 'Escalated' : 'Not Escalated'}</span>`}</td>
+            <td>${decisionPill(professionalDecision)}</td>
+            <td>${decisionPill(aiDecision)}</td>
             <td>${escapeHtml(String(escalationTurn))}</td>
-            <td>${escapeHtml(agreement)}</td>
           </tr>
         `;
       }).join('');
@@ -699,10 +692,9 @@
               <th>Participant Yes</th>
               <th>Participant No</th>
               <th>Participant Handoff %</th>
-              <th>Professional Reviewer Decision</th>
+              <th>Professional Reviewer</th>
               <th>AI Decision</th>
               <th>AI Escalation Turn</th>
-              <th>Agreement / Disagreement</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
