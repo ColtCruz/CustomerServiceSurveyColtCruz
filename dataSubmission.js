@@ -59,7 +59,6 @@ async function postToSupabase(table, record, onConflictColumns) {
       headers: {
         'Content-Type': 'application/json',
         apikey: STUDY_SUBMISSION_CONFIG.supabaseAnonKey,
-        Authorization: `Bearer ${STUDY_SUBMISSION_CONFIG.supabaseAnonKey}`,
         Prefer: preferHeader
       },
       body: JSON.stringify(record)
@@ -133,7 +132,7 @@ async function loadStoredCollection(localStorageKey, table) {
       const response = await fetch(url, {
         headers: {
           apikey: STUDY_SUBMISSION_CONFIG.supabaseAnonKey,
-          Authorization: `Bearer ${STUDY_SUBMISSION_CONFIG.supabaseAnonKey}`
+          'Content-Type': 'application/json'
         }
       });
       if (response.ok) return await response.json();
