@@ -265,31 +265,15 @@ async function handleReviewAdvance() {
   const conversation = studyConversations[currentConversationIndex];
   const reasonInput = document.getElementById('optionalReasonInput');
 
-  if (!getSubmittedConversationIds(participantId).includes(conversation.conversationId)) {
-    const nextButton = document.getElementById('datasetReviewNextButton');
-    if (nextButton) nextButton.disabled = true;
-
-    try {
-      await submitParticipantResponse({
-        participantId,
-        role: STUDY_MODE,
-        conversationId: conversation.conversationId,
-        order: currentConversationIndex + 1,
-        handoffDecision: selectedButton.dataset.choice === 'yes',
-        optionalReason: reasonInput ? reasonInput.value.trim() : '',
-        respondedAt: new Date().toISOString()
-      });
-      markConversationSubmitted(participantId, conversation.conversationId);
-    } catch (error) {
-      console.error('Response submission failed; participant remains on the current conversation.', error);
-      if (nextButton) {
-        nextButton.disabled = false;
-        nextButton.textContent = 'Retry Submission';
-      }
-      window.alert('Your response could not be saved to the study database. Please check your connection and click Retry Submission. Your response is still saved in this browser.');
-      return;
-    }
-  }
+  await submitParticipantResponse({
+    participantId,
+    role: STUDY_MODE,
+    conversationId: conversation.conversationId,
+    order: currentConversationIndex + 1,
+    handoffDecision: selectedButton.dataset.choice === 'yes',
+    optionalReason: reasonInput ? reasonInput.value.trim() : '',
+    respondedAt: new Date().toISOString()
+  });
 
   if (currentConversationIndex < studyConversations.length - 1) {
     currentConversationIndex += 1;
