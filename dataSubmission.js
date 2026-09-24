@@ -18,7 +18,7 @@ const STUDY_SUBMISSION_CONFIG = {
   completionTable: 'study_completions',
   // Edge Function that captures the request's server-side IP and stores a hashed
   // session record. Never a client-submitted IP value.
-  sessionFunction: 'capture-session'
+  sessionFunction: 'capture-session-'
 };
 
 const RESPONSES_STORAGE_KEY = 'study.responses.v1';
