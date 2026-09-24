@@ -54,7 +54,7 @@ async function postToSupabase(table, record, onConflictColumns) {
   }
 
   try {
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,6 +64,11 @@ async function postToSupabase(table, record, onConflictColumns) {
       },
       body: JSON.stringify(record)
     });
+
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`Supabase returned HTTP ${response.status}: ${detail}`);
+    }
   } catch (error) {
     console.error(`Could not submit record to Supabase table "${table}" - it is still saved locally.`, error);
   }
@@ -99,7 +104,7 @@ async function submitParticipantSession(record) {
 
   const url = `${STUDY_SUBMISSION_CONFIG.supabaseUrl.replace(/\/$/, '')}/functions/v1/${STUDY_SUBMISSION_CONFIG.sessionFunction}`;
   try {
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -108,6 +113,11 @@ async function submitParticipantSession(record) {
       },
       body: JSON.stringify(record)
     });
+
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`Session function returned HTTP ${response.status}: ${detail}`);
+    }
   } catch (error) {
     console.error('Could not register participant session (IP capture).', error);
   }
