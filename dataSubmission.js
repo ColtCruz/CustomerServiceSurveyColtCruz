@@ -71,7 +71,6 @@ async function postToSupabase(table, record, onConflictColumns) {
     }
   } catch (error) {
     console.error(`Could not submit record to Supabase table "${table}" - it is still saved locally.`, error);
-    throw error;
   }
 }
 
