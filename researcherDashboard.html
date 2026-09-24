@@ -565,7 +565,18 @@
           const role = String(entry.role || '').toLowerCase();
           return role === 'general' && (entry.completed === true || entry.completionStatus === 'completed');
         });
-        if (completed.length) return new Set(completed.map((entry) => String(entry.participantId))).size;
+        if (completed.length) {
+          // Legacy study runs reused P-0001 before UUID participant IDs were
+          // introduced. Each completion row represents a separate completed
+          // legacy session, while UUID-era rows are counted by unique ID.
+          const legacyCompleted = completed.filter((entry) => String(entry.participantId) === 'P-0001').length;
+          const uniqueModernIds = new Set(
+            completed
+              .filter((entry) => String(entry.participantId) !== 'P-0001')
+              .map((entry) => String(entry.participantId))
+          ).size;
+          return legacyCompleted + uniqueModernIds;
+        }
         return uniqueParticipantIds(state.generalResponses, 'general');
       })();
 
