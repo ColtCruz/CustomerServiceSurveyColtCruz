@@ -15,7 +15,10 @@ const STUDY_SUBMISSION_CONFIG = {
   responsesTable: 'participant_responses',
   qualificationsTable: 'reviewer_qualifications',
   postSurveyTable: 'post_study_surveys',
-  completionTable: 'study_completions'
+  completionTable: 'study_completions',
+  // Edge Function that captures the request's server-side IP and stores a hashed
+  // session record. Never a client-submitted IP value.
+  sessionFunction: 'capture-session'
 };
 
 const RESPONSES_STORAGE_KEY = 'study.responses.v1';
@@ -75,6 +78,30 @@ async function submitPostStudySurvey(record) {
 async function submitStudyCompletion(record) {
   appendToLocalStorage(COMPLETIONS_STORAGE_KEY, record);
   await postToSupabase(STUDY_SUBMISSION_CONFIG.completionTable, record);
+}
+
+// Registers the participant/session server-side so the incoming request's real
+// IP address can be captured and hashed by the Edge Function - the browser never
+// computes or sends an IP value itself. Best-effort: failures are logged only.
+async function submitParticipantSession(record) {
+  if (!STUDY_SUBMISSION_CONFIG.supabaseUrl || !STUDY_SUBMISSION_CONFIG.supabaseAnonKey) {
+    return;
+  }
+
+  const url = `${STUDY_SUBMISSION_CONFIG.supabaseUrl.replace(/\/$/, '')}/functions/v1/${STUDY_SUBMISSION_CONFIG.sessionFunction}`;
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: STUDY_SUBMISSION_CONFIG.supabaseAnonKey,
+        Authorization: `Bearer ${STUDY_SUBMISSION_CONFIG.supabaseAnonKey}`
+      },
+      body: JSON.stringify(record)
+    });
+  } catch (error) {
+    console.error('Could not register participant session (IP capture).', error);
+  }
 }
 
 // Read side for researcherDashboard.html: Supabase first (once configured),

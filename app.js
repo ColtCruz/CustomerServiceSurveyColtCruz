@@ -34,10 +34,29 @@ function bindIfExists(id, eventName, handler) {
   if (element) element.addEventListener(eventName, handler);
 }
 
+const PARTICIPANT_ID_STORAGE_KEY = 'study.participantId.v1';
+
+function createUuid() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  // Fallback UUID v4 generator for browsers without crypto.randomUUID.
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+// UUID-based participant ID, globally unique across devices/browsers. Persisted in
+// localStorage so a page refresh mid-study keeps the same participant identity.
 function generateParticipantId() {
-  const nextId = Math.max(1, (Number(localStorage.getItem('participantSessionCounter') || '0')) + 1);
-  localStorage.setItem('participantSessionCounter', String(nextId));
-  return `P-${String(nextId).padStart(4, '0')}`;
+  const existing = localStorage.getItem(PARTICIPANT_ID_STORAGE_KEY);
+  if (existing) return existing;
+
+  const newId = createUuid();
+  localStorage.setItem(PARTICIPANT_ID_STORAGE_KEY, newId);
+  return newId;
 }
 
 function randomizeConversations(list) {
@@ -92,6 +111,14 @@ function handleConsentCheckboxChange() {
 function handleConsentSubmit() {
   if (!document.getElementById('consentCheckbox').checked) return;
   participantId = generateParticipantId();
+
+  // Fire-and-forget: server-side IP capture is supplementary duplicate-detection
+  // metadata, not required for the participant to proceed.
+  submitParticipantSession({
+    participantId,
+    role: STUDY_MODE,
+    mode: STUDY_MODE
+  });
 
   if (STUDY_MODE === 'professional') {
     showCard('qualificationCard');
