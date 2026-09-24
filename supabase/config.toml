@@ -1,2 +1,2 @@
 [functions.capture-session]
-verify_jwt = true
+verify_jwt = false
