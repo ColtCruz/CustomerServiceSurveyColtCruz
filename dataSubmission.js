@@ -107,9 +107,7 @@ async function submitParticipantSession(record) {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        apikey: STUDY_SUBMISSION_CONFIG.supabaseAnonKey,
-        Authorization: `Bearer ${STUDY_SUBMISSION_CONFIG.supabaseAnonKey}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(record)
     });
