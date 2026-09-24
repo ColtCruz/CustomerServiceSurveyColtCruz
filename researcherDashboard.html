@@ -430,16 +430,40 @@
       }
     }
 
+    // Fixed participant ID for the permanent professional-reviewer reference
+    // dataset (research/professional_reviewer_reference.json) - keeps it from
+    // ever being confused with a live-collected professional submission.
+    const PROFESSIONAL_REFERENCE_ID = 'professional-reviewer-reference';
+
     const state = {
       selectedConversationId: null,
       selectedTurnNumber: null,
       generalResponses: [],
       professionalResponses: [],
+      professionalReference: [],
       aiRecords: [],
       conversations: [],
       completions: [],
       qualifications: []
     };
+
+    // Converts the static professional-reviewer reference judgments into the same
+    // response shape the rest of the dashboard already knows how to summarize/
+    // compare, so this permanent expert-comparison dataset - not general
+    // participant responses and not the AI - drives every "Professional Reviewer"
+    // decision and agreement calculation.
+    function buildProfessionalResponsesFromReference(referenceEntries) {
+      return (Array.isArray(referenceEntries) ? referenceEntries : [])
+        .filter((entry) => entry && typeof entry.handoffDecision === 'boolean')
+        .map((entry) => ({
+          participantId: PROFESSIONAL_REFERENCE_ID,
+          role: 'professional',
+          conversationId: normalizeConversationId(entry.conversationId),
+          order: entry.order,
+          handoffDecision: entry.handoffDecision,
+          completed: true
+        }));
+    }
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -995,11 +1019,12 @@
       ]);
 
       state.generalResponses = getRoleResponses(responses, 'general');
-      state.professionalResponses = getRoleResponses(responses, 'professional');
       state.qualifications = qualifications;
       state.completions = completions;
       state.aiRecords = (await fetchJsonSafe('research/ai_analysis_25.json')) || [];
       state.conversations = (await fetchJsonSafe('research/study_conversations.json')) || [];
+      state.professionalReference = (await fetchJsonSafe('research/professional_reviewer_reference.json')) || [];
+      state.professionalResponses = buildProfessionalResponsesFromReference(state.professionalReference);
       state.selectedConversationId = state.conversations.length ? normalizeConversationId(state.conversations[0].conversationId) : null;
       state.selectedTurnNumber = null;
 

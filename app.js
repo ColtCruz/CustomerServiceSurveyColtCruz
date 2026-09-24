@@ -34,6 +34,33 @@ function bindIfExists(id, eventName, handler) {
   if (element) element.addEventListener(eventName, handler);
 }
 
+const SUBMITTED_CONVERSATIONS_STORAGE_KEY = 'study.submittedConversationIds.v1';
+
+// Client-side half of duplicate-response protection: tracks which conversationIds
+// this participant has already submitted so a resumed/duplicated flow can't send
+// a second participant_responses record for the same conversation (the Supabase
+// unique constraint on participantId+conversationId is the server-side half).
+function getSubmittedConversationIds(id) {
+  try {
+    const all = JSON.parse(localStorage.getItem(SUBMITTED_CONVERSATIONS_STORAGE_KEY) || '{}');
+    return Array.isArray(all[id]) ? all[id] : [];
+  } catch (_error) {
+    return [];
+  }
+}
+
+function markConversationSubmitted(id, conversationId) {
+  let all = {};
+  try {
+    all = JSON.parse(localStorage.getItem(SUBMITTED_CONVERSATIONS_STORAGE_KEY) || '{}');
+  } catch (_error) {
+    all = {};
+  }
+  if (!Array.isArray(all[id])) all[id] = [];
+  if (!all[id].includes(conversationId)) all[id].push(conversationId);
+  localStorage.setItem(SUBMITTED_CONVERSATIONS_STORAGE_KEY, JSON.stringify(all));
+}
+
 const PARTICIPANT_ID_STORAGE_KEY = 'study.participantId.v1';
 
 function createUuid() {
@@ -238,15 +265,18 @@ async function handleReviewAdvance() {
   const conversation = studyConversations[currentConversationIndex];
   const reasonInput = document.getElementById('optionalReasonInput');
 
-  await submitParticipantResponse({
-    participantId,
-    role: STUDY_MODE,
-    conversationId: conversation.conversationId,
-    order: currentConversationIndex + 1,
-    handoffDecision: selectedButton.dataset.choice === 'yes',
-    optionalReason: reasonInput ? reasonInput.value.trim() : '',
-    respondedAt: new Date().toISOString()
-  });
+  if (!getSubmittedConversationIds(participantId).includes(conversation.conversationId)) {
+    await submitParticipantResponse({
+      participantId,
+      role: STUDY_MODE,
+      conversationId: conversation.conversationId,
+      order: currentConversationIndex + 1,
+      handoffDecision: selectedButton.dataset.choice === 'yes',
+      optionalReason: reasonInput ? reasonInput.value.trim() : '',
+      respondedAt: new Date().toISOString()
+    });
+    markConversationSubmitted(participantId, conversation.conversationId);
+  }
 
   if (currentConversationIndex < studyConversations.length - 1) {
     currentConversationIndex += 1;

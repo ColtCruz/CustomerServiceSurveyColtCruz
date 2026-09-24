@@ -38,12 +38,21 @@ function appendToLocalStorage(key, record) {
   localStorage.setItem(key, JSON.stringify(existing));
 }
 
-async function postToSupabase(table, record) {
+async function postToSupabase(table, record, onConflictColumns) {
   if (!STUDY_SUBMISSION_CONFIG.supabaseUrl || !STUDY_SUBMISSION_CONFIG.supabaseAnonKey) {
     return;
   }
 
-  const url = `${STUDY_SUBMISSION_CONFIG.supabaseUrl.replace(/\/$/, '')}/rest/v1/${table}`;
+  let url = `${STUDY_SUBMISSION_CONFIG.supabaseUrl.replace(/\/$/, '')}/rest/v1/${table}`;
+  // Duplicate-response protection: with an on_conflict target and this Prefer
+  // header, PostgREST upserts - a duplicate key is silently ignored server-side
+  // instead of erroring or overwriting the original legitimate response.
+  let preferHeader = 'return=minimal';
+  if (onConflictColumns) {
+    url += `?on_conflict=${encodeURIComponent(onConflictColumns)}`;
+    preferHeader = 'resolution=ignore-duplicates,return=minimal';
+  }
+
   try {
     await fetch(url, {
       method: 'POST',
@@ -51,7 +60,7 @@ async function postToSupabase(table, record) {
         'Content-Type': 'application/json',
         apikey: STUDY_SUBMISSION_CONFIG.supabaseAnonKey,
         Authorization: `Bearer ${STUDY_SUBMISSION_CONFIG.supabaseAnonKey}`,
-        Prefer: 'return=minimal'
+        Prefer: preferHeader
       },
       body: JSON.stringify(record)
     });
@@ -62,7 +71,7 @@ async function postToSupabase(table, record) {
 
 async function submitParticipantResponse(record) {
   appendToLocalStorage(RESPONSES_STORAGE_KEY, record);
-  await postToSupabase(STUDY_SUBMISSION_CONFIG.responsesTable, record);
+  await postToSupabase(STUDY_SUBMISSION_CONFIG.responsesTable, record, 'participantId,conversationId');
 }
 
 async function submitQualification(record) {

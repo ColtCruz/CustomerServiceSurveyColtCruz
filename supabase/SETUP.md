@@ -19,6 +19,21 @@ and `study_completions` so the public `anon` key can only **INSERT**, never
 > stop working. Per your instructions that file isn't being touched here -
 > it will need a separate authenticated/service-side read path later.
 
+## 1b. Run the duplicate-response migration
+
+Also in the SQL Editor, paste and run:
+
+`supabase/sql/2026-09-24_dedupe_participant_responses.sql`
+
+This removes any pre-existing duplicate `participant_responses` rows for the
+same participant + conversation (keeping the earliest one; responses from
+other participants are untouched), then adds a unique constraint on
+`(participantId, conversationId)` so the same participant can never create a
+second response row for the same conversation. The frontend now submits
+responses with `?on_conflict=participantId,conversationId` and
+`Prefer: resolution=ignore-duplicates`, which requires this constraint to
+exist - deploy it before shipping the updated `dataSubmission.js`.
+
 ## 2. Install the Supabase CLI and log in (one time)
 
 ```powershell
