@@ -10,8 +10,8 @@
 // ─────────────────────────────────────────────────────────────────────
 
 const STUDY_SUBMISSION_CONFIG = {
-  supabaseUrl: '',       // e.g. 'https://xxxxx.supabase.co'
-  supabaseAnonKey: '',   // Supabase project anon/public key
+  supabaseUrl: 'https://cpumoqxlimgpeggzkozx.supabase.co',
+  supabaseAnonKey: 'sb_publishable_OR1PP908JzvdleqjGyGmiQ_zp2JEe_Y',
   responsesTable: 'participant_responses',
   qualificationsTable: 'reviewer_qualifications',
   postSurveyTable: 'post_study_surveys',
