@@ -75,7 +75,10 @@ async function postToSupabase(table, record, onConflictColumns) {
 
 async function submitParticipantResponse(record) {
   appendToLocalStorage(RESPONSES_STORAGE_KEY, record);
-  await postToSupabase(STUDY_SUBMISSION_CONFIG.responsesTable, record, 'participantId,conversationId');
+  // Each participant has a UUID. Conversation IDs intentionally repeat across
+  // participants, so submit each judgment as a normal INSERT. Do not use
+  // PostgREST on_conflict/ignore-duplicates here.
+  await postToSupabase(STUDY_SUBMISSION_CONFIG.responsesTable, record);
 }
 
 async function submitQualification(record) {
