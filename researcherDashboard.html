@@ -478,6 +478,14 @@
       return String(value ?? '').trim();
     }
 
+    function normalizeDecision(value) {
+      if (value === true || value === false) return value;
+      const normalized = String(value ?? '').trim().toLowerCase();
+      if (normalized === 'true' || normalized === 'yes' || normalized === '1') return true;
+      if (normalized === 'false' || normalized === 'no' || normalized === '0') return false;
+      return null;
+    }
+
     function getRoleResponses(items, role) {
       return (Array.isArray(items) ? items : []).filter((entry) => String(entry.role || '').toLowerCase() === role);
     }
@@ -513,14 +521,17 @@
         return matchRole && matchConversation;
       });
 
-      const yes = filtered.filter((response) => response.handoffDecision === true).length;
-      const no = filtered.filter((response) => response.handoffDecision === false).length;
+      const decisions = filtered
+        .map((response) => normalizeDecision(response.handoffDecision))
+        .filter((decision) => decision !== null);
+      const yes = decisions.filter((decision) => decision === true).length;
+      const no = decisions.filter((decision) => decision === false).length;
       return {
-        total: filtered.length,
+        total: decisions.length,
         yes,
         no,
-        rate: filtered.length ? pct(yes, filtered.length) : 0,
-        majority: filtered.length ? (yes > no ? true : false) : null
+        rate: decisions.length ? pct(yes, decisions.length) : 0,
+        majority: decisions.length && yes !== no ? yes > no : null
       };
     }
 
@@ -556,8 +567,14 @@
     function buildSummaryMetrics() {
       const generalResponses = getRoleResponses(state.generalResponses, 'general');
       const professionalResponses = getRoleResponses(state.professionalResponses, 'professional');
-      const generalYes = generalResponses.filter((entry) => entry.handoffDecision === true).length;
-      const professionalYes = professionalResponses.filter((entry) => entry.handoffDecision === true).length;
+      const generalDecisions = generalResponses
+        .map((entry) => normalizeDecision(entry.handoffDecision))
+        .filter((decision) => decision !== null);
+      const professionalDecisions = professionalResponses
+        .map((entry) => normalizeDecision(entry.handoffDecision))
+        .filter((decision) => decision !== null);
+      const generalYes = generalDecisions.filter((decision) => decision === true).length;
+      const professionalYes = professionalDecisions.filter((decision) => decision === true).length;
       const aiEscalatedCount = (state.aiRecords || []).filter((record) => record.aiHandoffDecision === true).length;
 
       const generalCompleted = (() => {
@@ -630,8 +647,8 @@
         generalParticipants: generalCompleted,
         professionalParticipants: professionalCompleted,
         totalJudgments: generalResponses.length + professionalResponses.length,
-        participantHandoffRate: generalResponses.length ? pct(generalYes, generalResponses.length) : 0,
-        professionalHandoffRate: professionalResponses.length ? pct(professionalYes, professionalResponses.length) : 0,
+        participantHandoffRate: generalDecisions.length ? pct(generalYes, generalDecisions.length) : 0,
+        professionalHandoffRate: professionalDecisions.length ? pct(professionalYes, professionalDecisions.length) : 0,
         aiEscalationRate: (state.aiRecords || []).length ? pct(aiEscalatedCount, (state.aiRecords || []).length) : 0,
         participantProfessionalAgreement,
         participantAiAgreement,
