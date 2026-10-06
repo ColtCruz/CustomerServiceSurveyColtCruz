@@ -256,6 +256,7 @@ const CHARGEBACK_PHRASES = [
 ];
 
 const SECURITY_PHRASES = [
+    'account hacked',
   'account has been compromised', 'account was compromised', 'my account is compromised',
   'security compromise', 'account takeover', 'account was hacked', 'my account was hacked',
   'someone hacked my account', 'unauthorized access', 'someone accessed my account',
@@ -609,4 +610,5 @@ async function analyzeCustomerTurnWithGoEmotions(text) {
 
   return result;
 }
+
 

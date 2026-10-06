@@ -61,6 +61,7 @@ CHARGEBACK_PHRASES = [
     "refund me", "cancel my account", "close my account", "cancel my subscription",
 ]
 SECURITY_PHRASES = [
+    "account hacked",
     "account has been compromised", "account was compromised", "my account is compromised",
     "security compromise", "account takeover", "account was hacked", "my account was hacked",
     "someone hacked my account", "unauthorized access", "someone accessed my account",
@@ -272,3 +273,4 @@ def build_emotion_profile(go_emotions_raw: Any, text: str) -> Dict[str, Any]:
         "deteriorationSignals": deterioration_signals,
         "contextualSignals": contextual_signals,
     }
+
