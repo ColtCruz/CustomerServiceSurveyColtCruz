@@ -440,6 +440,9 @@
       selectedTurnNumber: null,
       generalResponses: [],
       professionalResponses: [],
+      professionalReviewer1Responses: [],
+      professionalReviewer2Responses: [],
+      liveProfessionalResponses: [],
       professionalReference: [],
       aiRecords: [],
       conversations: [],
@@ -543,6 +546,13 @@
       return yesCount > noCount;
     }
 
+    function individualReviewerDecision(responses, conversationId) {
+      const match = (responses || []).find((response) =>
+        normalizeConversationId(response.conversationId) === normalizeConversationId(conversationId)
+      );
+      return match ? normalizeDecision(match.handoffDecision) : null;
+    }
+
     function getConversationDisplayNumber(conversationId) {
       const context = state.conversations || [];
       const index = context.findIndex((entry) => normalizeConversationId(entry.conversationId) === normalizeConversationId(conversationId));
@@ -598,12 +608,14 @@
       })();
 
       const professionalCompleted = (() => {
+        const reviewer1Complete = state.professionalReviewer1Responses.length ? 1 : 0;
         const completed = (state.completions || []).filter((entry) => {
           const role = String(entry.role || '').toLowerCase();
           return role === 'professional' && (entry.completed === true || entry.completionStatus === 'completed');
         });
-        if (completed.length) return new Set(completed.map((entry) => String(entry.participantId))).size;
-        return uniqueParticipantIds(state.professionalResponses, 'professional');
+        const liveCompletedIds = new Set(completed.map((entry) => String(entry.participantId)));
+        const liveCount = liveCompletedIds.size || uniqueParticipantIds(state.liveProfessionalResponses, 'professional');
+        return reviewer1Complete + liveCount;
       })();
 
       const conversationAgreementPairs = [];
@@ -614,6 +626,8 @@
         const conversationId = normalizeConversationId(conversation.conversationId);
         const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
         const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
+      const reviewer1Decision = individualReviewerDecision(state.professionalReviewer1Responses, conversationId);
+      const reviewer2Decision = individualReviewerDecision(state.professionalReviewer2Responses, conversationId);
         const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
         const aiDecision = aiRecord ? Boolean(aiRecord.aiHandoffDecision) : null;
 
@@ -646,8 +660,10 @@
       return {
         generalParticipants: generalCompleted,
         professionalParticipants: professionalCompleted,
-        totalJudgments: generalResponses.length + professionalResponses.length,
-        participantHandoffRate: generalDecisions.length ? pct(generalYes, generalDecisions.length) : 0,
+        totalJudgments: (generalCompleted + professionalCompleted) * (state.conversations || []).length,
+        participantHandoffRate: generalCompleted && (state.conversations || []).length
+          ? pct(generalYes, generalCompleted * (state.conversations || []).length)
+          : 0,
         professionalHandoffRate: professionalDecisions.length ? pct(professionalYes, professionalDecisions.length) : 0,
         aiEscalationRate: (state.aiRecords || []).length ? pct(aiEscalatedCount, (state.aiRecords || []).length) : 0,
         participantProfessionalAgreement,
@@ -686,12 +702,20 @@
         return;
       }
 
+      const metrics = buildSummaryMetrics();
+      const completedGeneralSurveys = metrics.generalParticipants;
+
       const rows = conversationIds.map((conversationId) => {
         const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
-        const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
+        const participantYes = participantSummary.yes;
+        const participantNo = Math.max(0, completedGeneralSurveys - participantYes);
+        const participantRate = completedGeneralSurveys ? pct(participantYes, completedGeneralSurveys) : 0;
+
+        const reviewer1Decision = individualReviewerDecision(state.professionalReviewer1Responses, conversationId);
+        const reviewer2Decision = individualReviewerDecision(state.professionalReviewer2Responses, conversationId);
+
         const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
         const aiDecision = aiRecord && aiRecord.aiHandoffDecision !== undefined ? Boolean(aiRecord.aiHandoffDecision) : null;
-        const professionalDecision = professionalSummary.total ? professionalSummary.majority : null;
         const escalationTurn = aiRecord && aiRecord.escalationTurn !== null && aiRecord.escalationTurn !== undefined ? aiRecord.escalationTurn : '—';
         const displayIndex = getConversationDisplayNumber(conversationId);
 
@@ -702,10 +726,11 @@
         return `
           <tr class="conversation-row ${state.selectedConversationId === conversationId ? 'selected' : ''}" data-conversation-id="${escapeHtml(conversationId)}" tabindex="0">
             <td><strong>${escapeHtml(displayIndex !== null ? String(displayIndex) : conversationId)}</strong></td>
-            <td>${participantSummary.total ? participantSummary.yes : 0}</td>
-            <td>${participantSummary.total ? participantSummary.no : 0}</td>
-            <td>${participantSummary.total ? `${participantSummary.rate}%` : '0%'}</td>
-            <td>${decisionPill(professionalDecision)}</td>
+            <td>${participantYes}</td>
+            <td>${participantNo}</td>
+            <td>${participantRate}%</td>
+            <td>${decisionPill(reviewer1Decision)}</td>
+            <td>${decisionPill(reviewer2Decision)}</td>
             <td>${decisionPill(aiDecision)}</td>
             <td>${escapeHtml(String(escalationTurn))}</td>
           </tr>
@@ -720,7 +745,8 @@
               <th>Participant Yes</th>
               <th>Participant No</th>
               <th>Participant Handoff %</th>
-              <th>Professional Reviewer</th>
+              <th>Professional Reviewer 1</th>
+              <th>Professional Reviewer 2</th>
               <th>AI Decision</th>
               <th>AI Escalation Turn</th>
             </tr>
@@ -954,9 +980,9 @@
           <div class="mini-metric"><strong>Participant Yes</strong>${escapeHtml(participantYes)}</div>
           <div class="mini-metric"><strong>Participant No</strong>${escapeHtml(participantNo)}</div>
           <div class="mini-metric"><strong>Participant Handoff Rate</strong>${participantSummary.total ? `${participantSummary.rate}%` : '0%'}</div>
-          <div class="mini-metric"><strong>Professional Yes</strong>${escapeHtml(professionalYes)}</div>
-          <div class="mini-metric"><strong>Professional No</strong>${escapeHtml(professionalNo)}</div>
-          <div class="mini-metric"><strong>Professional Rate</strong>${professionalSummary.total ? `${professionalSummary.rate}%` : '0%'}</div>
+          <div class="mini-metric"><strong>Professional Reviewer 1</strong>${escapeHtml(toDecisionText(reviewer1Decision))}</div>
+          <div class="mini-metric"><strong>Professional Reviewer 2</strong>${escapeHtml(toDecisionText(reviewer2Decision))}</div>
+          <div class="mini-metric"><strong>Combined Professional Rate</strong>${professionalSummary.total ? `${professionalSummary.rate}%` : '0%'}</div>
         </div>
       `;
 
@@ -1039,12 +1065,40 @@
       ]);
 
       state.generalResponses = getRoleResponses(responses, 'general');
+      state.liveProfessionalResponses = getRoleResponses(responses, 'professional');
       state.qualifications = qualifications;
       state.completions = completions;
       state.aiRecords = (await fetchJsonSafe('research/ai_analysis_25.json')) || [];
       state.conversations = (await fetchJsonSafe('research/study_conversations.json')) || [];
       state.professionalReference = (await fetchJsonSafe('research/professional_reviewer_reference.json')) || [];
-      state.professionalResponses = buildProfessionalResponsesFromReference(state.professionalReference);
+
+      state.professionalReviewer1Responses = buildProfessionalResponsesFromReference(state.professionalReference);
+
+      const completedProfessionalIds = new Set(
+        (state.completions || [])
+          .filter((entry) => {
+            const role = String(entry.role || '').toLowerCase();
+            return role === 'professional' && (entry.completed === true || entry.completionStatus === 'completed');
+          })
+          .map((entry) => String(entry.participantId))
+      );
+
+      const eligibleLiveProfessionalResponses = completedProfessionalIds.size
+        ? state.liveProfessionalResponses.filter((entry) => completedProfessionalIds.has(String(entry.participantId)))
+        : state.liveProfessionalResponses;
+
+      const reviewer2Id = eligibleLiveProfessionalResponses.length
+        ? String(eligibleLiveProfessionalResponses[0].participantId)
+        : null;
+
+      state.professionalReviewer2Responses = reviewer2Id
+        ? eligibleLiveProfessionalResponses.filter((entry) => String(entry.participantId) === reviewer2Id)
+        : [];
+
+      state.professionalResponses = [
+        ...state.professionalReviewer1Responses,
+        ...state.professionalReviewer2Responses
+      ];
       state.selectedConversationId = state.conversations.length ? normalizeConversationId(state.conversations[0].conversationId) : null;
       state.selectedTurnNumber = null;
 
