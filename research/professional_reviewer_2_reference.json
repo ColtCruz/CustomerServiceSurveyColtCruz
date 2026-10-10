@@ -122,6 +122,6 @@
   {
     "order": 25,
     "conversationId": "96",
-    "handoffDecision": false
+    "handoffDecision": true
   }
 ]
