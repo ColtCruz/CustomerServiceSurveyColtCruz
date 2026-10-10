@@ -444,6 +444,7 @@
       professionalReviewer2Responses: [],
       liveProfessionalResponses: [],
       professionalReference: [],
+      professionalReviewer2Reference: [],
       aiRecords: [],
       conversations: [],
       completions: [],
@@ -609,13 +610,8 @@
 
       const professionalCompleted = (() => {
         const reviewer1Complete = state.professionalReviewer1Responses.length ? 1 : 0;
-        const completed = (state.completions || []).filter((entry) => {
-          const role = String(entry.role || '').toLowerCase();
-          return role === 'professional' && (entry.completed === true || entry.completionStatus === 'completed');
-        });
-        const liveCompletedIds = new Set(completed.map((entry) => String(entry.participantId)));
-        const liveCount = liveCompletedIds.size || uniqueParticipantIds(state.liveProfessionalResponses, 'professional');
-        return reviewer1Complete + liveCount;
+        const reviewer2Complete = state.professionalReviewer2Responses.length ? 1 : 0;
+        return reviewer1Complete + reviewer2Complete;
       })();
 
       const conversationAgreementPairs = [];
@@ -1073,29 +1069,19 @@
       state.aiRecords = (await fetchJsonSafe('research/ai_analysis_25.json')) || [];
       state.conversations = (await fetchJsonSafe('research/study_conversations.json')) || [];
       state.professionalReference = (await fetchJsonSafe('research/professional_reviewer_reference.json')) || [];
+      state.professionalReviewer2Reference = (await fetchJsonSafe('research/professional_reviewer_2_reference.json')) || [];
 
       state.professionalReviewer1Responses = buildProfessionalResponsesFromReference(state.professionalReference);
-
-      const completedProfessionalIds = new Set(
-        (state.completions || [])
-          .filter((entry) => {
-            const role = String(entry.role || '').toLowerCase();
-            return role === 'professional' && (entry.completed === true || entry.completionStatus === 'completed');
-          })
-          .map((entry) => String(entry.participantId))
-      );
-
-      const eligibleLiveProfessionalResponses = completedProfessionalIds.size
-        ? state.liveProfessionalResponses.filter((entry) => completedProfessionalIds.has(String(entry.participantId)))
-        : state.liveProfessionalResponses;
-
-      const reviewer2Id = eligibleLiveProfessionalResponses.length
-        ? String(eligibleLiveProfessionalResponses[0].participantId)
-        : null;
-
-      state.professionalReviewer2Responses = reviewer2Id
-        ? eligibleLiveProfessionalResponses.filter((entry) => String(entry.participantId) === reviewer2Id)
-        : [];
+      state.professionalReviewer2Responses = (Array.isArray(state.professionalReviewer2Reference) ? state.professionalReviewer2Reference : [])
+        .filter((entry) => entry && typeof entry.handoffDecision === 'boolean')
+        .map((entry) => ({
+          participantId: 'professional-reviewer-2-reference',
+          role: 'professional',
+          conversationId: normalizeConversationId(entry.conversationId),
+          order: entry.order,
+          handoffDecision: entry.handoffDecision,
+          completed: true
+        }));
 
       state.professionalResponses = [
         ...state.professionalReviewer1Responses,
