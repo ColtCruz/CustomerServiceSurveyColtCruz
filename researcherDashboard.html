@@ -614,43 +614,64 @@
         return reviewer1Complete + reviewer2Complete;
       })();
 
-      const conversationAgreementPairs = [];
+      const participantProfessionalPairs = [];
       const participantVsAiPairs = [];
       const professionalVsAiPairs = [];
+      const reviewerAgreementPairs = [];
 
       (state.conversations || []).forEach((conversation) => {
         const conversationId = normalizeConversationId(conversation.conversationId);
         const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
-        const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
-      const reviewer1Decision = individualReviewerDecision(state.professionalReviewer1Responses, conversationId);
-      const reviewer2Decision = individualReviewerDecision(state.professionalReviewer2Responses, conversationId);
+        const reviewer1Decision = individualReviewerDecision(state.professionalReviewer1Responses, conversationId);
+        const reviewer2Decision = individualReviewerDecision(state.professionalReviewer2Responses, conversationId);
         const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
-        const aiDecision = aiRecord ? Boolean(aiRecord.aiHandoffDecision) : null;
+        const aiDecision = aiRecord && aiRecord.aiHandoffDecision !== undefined
+          ? normalizeDecision(aiRecord.aiHandoffDecision)
+          : null;
 
-        if (participantSummary.total && professionalSummary.total) {
-          conversationAgreementPairs.push([
-            majorityDecision(Array.from({ length: participantSummary.total }, () => participantSummary.majority)),
-            majorityDecision(Array.from({ length: professionalSummary.total }, () => professionalSummary.majority))
-          ]);
+        // Compare the participant majority with EACH professional reviewer.
+        // Do not collapse two reviewers into a "professional majority" because
+        // disagreements between two reviewers create a tie and distort agreement.
+        if (participantSummary.total && participantSummary.majority !== null) {
+          if (reviewer1Decision !== null) {
+            participantProfessionalPairs.push([participantSummary.majority, reviewer1Decision]);
+          }
+          if (reviewer2Decision !== null) {
+            participantProfessionalPairs.push([participantSummary.majority, reviewer2Decision]);
+          }
         }
 
-        if (participantSummary.total && aiDecision !== null) {
+        if (participantSummary.total && participantSummary.majority !== null && aiDecision !== null) {
           participantVsAiPairs.push([participantSummary.majority, aiDecision]);
         }
 
-        if (professionalSummary.total && aiDecision !== null) {
-          professionalVsAiPairs.push([professionalSummary.majority, aiDecision]);
+        // Compare AI with each professional reviewer independently, then aggregate
+        // all reviewer/conversation comparison pairs.
+        if (aiDecision !== null) {
+          if (reviewer1Decision !== null) {
+            professionalVsAiPairs.push([reviewer1Decision, aiDecision]);
+          }
+          if (reviewer2Decision !== null) {
+            professionalVsAiPairs.push([reviewer2Decision, aiDecision]);
+          }
+        }
+
+        if (reviewer1Decision !== null && reviewer2Decision !== null) {
+          reviewerAgreementPairs.push([reviewer1Decision, reviewer2Decision]);
         }
       });
 
-      const participantProfessionalAgreement = conversationAgreementPairs.length
-        ? pct(conversationAgreementPairs.filter(([a, b]) => a === b).length, conversationAgreementPairs.length)
+      const participantProfessionalAgreement = participantProfessionalPairs.length
+        ? pct(participantProfessionalPairs.filter(([a, b]) => a === b).length, participantProfessionalPairs.length)
         : 0;
       const participantAiAgreement = participantVsAiPairs.length
         ? pct(participantVsAiPairs.filter(([a, b]) => a === b).length, participantVsAiPairs.length)
         : 0;
       const professionalAiAgreement = professionalVsAiPairs.length
         ? pct(professionalVsAiPairs.filter(([a, b]) => a === b).length, professionalVsAiPairs.length)
+        : 0;
+      const professionalInterReviewerAgreement = reviewerAgreementPairs.length
+        ? pct(reviewerAgreementPairs.filter(([a, b]) => a === b).length, reviewerAgreementPairs.length)
         : 0;
 
       return {
@@ -664,7 +685,8 @@
         aiEscalationRate: (state.aiRecords || []).length ? pct(aiEscalatedCount, (state.aiRecords || []).length) : 0,
         participantProfessionalAgreement,
         participantAiAgreement,
-        professionalAiAgreement
+        professionalAiAgreement,
+        professionalInterReviewerAgreement
       };
     }
 
@@ -677,9 +699,10 @@
         { label: 'Overall Participant Handoff Rate', value: `${metrics.participantHandoffRate}%`, subtext: `${formatPercent(metrics.participantHandoffRate, 100)} of general responses` },
         { label: 'Overall Professional Handoff Rate', value: `${metrics.professionalHandoffRate}%`, subtext: `${formatPercent(metrics.professionalHandoffRate, 100)} of professional responses` },
         { label: 'Overall AI Escalation Rate', value: `${metrics.aiEscalationRate}%`, subtext: 'precomputed AI decisions' },
-        { label: 'Participant vs Professional Agreement', value: `${metrics.participantProfessionalAgreement}%`, subtext: 'majority decision match' },
-        { label: 'Participant vs AI Agreement', value: `${metrics.participantAiAgreement}%`, subtext: 'majority vs AI' },
-        { label: 'Professional vs AI Agreement', value: `${metrics.professionalAiAgreement}%`, subtext: 'majority vs AI' }
+        { label: 'Participant vs Professional Agreement', value: `${metrics.participantProfessionalAgreement}%`, subtext: 'participant majority vs both reviewers' },
+        { label: 'Participant vs AI Agreement', value: `${metrics.participantAiAgreement}%`, subtext: 'participant majority vs AI' },
+        { label: 'Professional vs AI Agreement', value: `${metrics.professionalAiAgreement}%`, subtext: 'both reviewers vs AI' },
+        { label: 'Professional Reviewer Agreement', value: `${metrics.professionalInterReviewerAgreement}%`, subtext: 'Reviewer 1 vs Reviewer 2' }
       ];
 
       document.getElementById('summaryGrid').innerHTML = cards.map((card) => `
