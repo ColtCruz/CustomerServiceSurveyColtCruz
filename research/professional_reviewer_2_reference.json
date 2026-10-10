@@ -97,7 +97,7 @@
   {
     "order": 20,
     "conversationId": "20",
-    "handoffDecision": true
+    "handoffDecision": false
   },
   {
     "order": 21,
