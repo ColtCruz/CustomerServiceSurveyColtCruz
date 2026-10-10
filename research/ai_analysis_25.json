@@ -17506,8 +17506,8 @@
     "confusion": 0,
     "escalationRisk": 0.0077,
     "highestEscalationRisk": 0.6106,
-    "aiHandoffDecision": true,
-    "escalationTurn": 1,
+    "aiHandoffDecision": false,
+    "escalationTurn": null,
     "escalationTriggers": [
       "high negative emotion intensity"
     ],
