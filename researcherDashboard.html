@@ -893,6 +893,8 @@
       const aiRecord = (state.aiRecords || []).find((record) => normalizeConversationId(record.conversationId) === conversationId) || null;
       const participantSummary = summaryForRole(state.generalResponses, 'general', conversationId);
       const professionalSummary = summaryForRole(state.professionalResponses, 'professional', conversationId);
+      const reviewer1Decision = individualReviewerDecision(state.professionalReviewer1Responses, conversationId);
+      const reviewer2Decision = individualReviewerDecision(state.professionalReviewer2Responses, conversationId);
       const customerTurns = Array.isArray(conversation?.turns) ? conversation.turns.filter((turn) => turn.role === 'customer') : [];
       const escalationTurn = aiRecord && (aiRecord.escalationTurn !== null && aiRecord.escalationTurn !== undefined) ? Number(aiRecord.escalationTurn) : null;
       const defaultSelectedTurn = escalationTurn || (customerTurns[0] ? Number(customerTurns[0].turnNumber) : null);
